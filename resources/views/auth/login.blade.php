@@ -32,9 +32,7 @@
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-                        <div class="bottom">
-                            <span>Don't have an account? <a href="{{route('register')}}">Register</a></span>
-                        </div>
+
                     </form>
                 </div>
             </div>

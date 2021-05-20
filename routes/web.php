@@ -22,7 +22,11 @@ use App\Http\Controllers\{
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');;
+});
+
+Route::any('/register', function () {
+    return redirect('/login');
 });
 
 Route::middleware(['auth'])->group(function () {
