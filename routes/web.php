@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     GalleryController,
     VillageInfoController,
     CategoryController,
+    UserController
 };
 
 /*
@@ -45,4 +46,21 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
 
     Route::resource('/category', CategoryController::class);
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/setting', [VillageInfoController::class, 'show']);
+    Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
+
+    Route::resource('/citizen', CitizenController::class);
+
+    Route::resource('/family', FamilyController::class);
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
 });

@@ -1,16 +1,18 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ asset('assets/img/user.png') }}" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ auth()->user()->name }}</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href=""><i class="icon-user"></i>My Profile</a></li>
-                    <li><a href=""><i class="icon-envelope-open"></i>Messages</a></li>
-                    <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{route('logout')}}"><i class="icon-power"></i>Logout</a></li>
+                    <li>
+                        <form action="{{route('logout')}}" method="POST">
+                            @csrf
+                            <button class="btn btn-danger text-white  btn-block"><i class="icon-power mr-2"></i>Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -23,12 +25,18 @@
                         <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
                             <a href="{{ route('dashboard') }}"><i class="icon-home"></i> <span>Dashboard</span></a>
                         </li>
+                        @if (auth()->user()->role->name == 'admin')
+                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                            <a href="{{ route('users.index') }}"><i class="icon-users"></i> <span>User</span></a>
+                        </li>
                         <li class="{{ Request::segment(1) === 'citizen' ? 'active' : null }}">
                             <a href="{{ route('citizen.index') }}"><i class="icon-users"></i> <span>Penduduk</span></a>
                         </li>
                         <li class="{{ Request::segment(1) === 'family' ? 'active' : null }}">
                             <a href="{{ route('family.index') }}"><i class="icon-heart"></i> <span>Keluarga</span></a>
                         </li>
+
+                        @endif
                         <li class="{{ Request::segment(1) === 'gallery' ? 'active' : null }}">
                             <a href="{{ route('gallery.index') }}"><i class="icon-camera"></i> <span>Gallery</span></a>
                         </li>
@@ -38,9 +46,11 @@
                         <li class="{{ Request::segment(1) === 'post' ? 'active' : null }}">
                             <a href="{{ route('post.index') }}"><i class="icon-folder"></i> <span>Artikel</span></a>
                         </li>
+                        @if (auth()->user()->role->name == 'admin')
                         <li class="{{ Request::segment(1) === 'setting' ? 'active' : null }}">
                             <a href="/setting"><i class="icon-wrench"></i> <span>Pengaturan</span></a>
                         </li>
+                        @endif
                     </ul>
                 </nav>
             </div>
