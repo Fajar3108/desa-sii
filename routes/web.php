@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/category', CategoryController::class);
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/profile', [UserController::class, 'show'])->name('users.show');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
 });

@@ -28,7 +28,8 @@ class UserRequest extends FormRequest
             'name' => 'required',
             'username' => ['required', 'min:5', 'max:8', 'alpha_dash', Rule::unique('users')],
             'email' => ['required', 'email', Rule::unique('users')],
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required',
         ];
     }
 }

@@ -81,15 +81,37 @@
             @csrf
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nama Lengkap" name="name" required>
+                @error('name')
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+                @enderror
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Username" name="username" required>
+                @error('username')
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+                @enderror
             </div>
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
+
+                @error('email')
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+                @enderror
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
+
+                @error('password')
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+                @enderror
             </div>
             <div class="form-group">
                 <select name="role" class="form-control">
@@ -97,6 +119,12 @@
                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                     @endforeach
                 </select>
+
+                @error('role')
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>

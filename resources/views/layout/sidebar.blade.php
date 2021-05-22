@@ -5,7 +5,7 @@
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ auth()->user()->name }}</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
-                    <li><a href=""><i class="icon-user"></i>My Profile</a></li>
+                    <li><a href="{{ route('users.show') }}"><i class="icon-user"></i>My Profile</a></li>
                     <li class="divider"></li>
                     <li>
                         <form action="{{route('logout')}}" method="POST">
