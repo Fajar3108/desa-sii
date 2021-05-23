@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'show'])->name('users.show');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::patch('/users/{user:id}', [UserController::class, 'updatePassword'])->name('users.update');
 });
 
 Route::middleware(['admin'])->group(function () {

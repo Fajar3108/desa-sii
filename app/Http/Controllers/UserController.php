@@ -32,4 +32,24 @@ class UserController extends Controller
         $user = auth()->user();
         return view('users.show', compact('user'));
     }
+
+    public function updatePassword(User $user)
+    {
+        request()->validate([
+            'password' => ['required', 'min:8', 'same:confirm_password']
+        ]);
+
+        $user->update([
+            'password' => bcrypt(request()->password),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->back();
+    }
 }
