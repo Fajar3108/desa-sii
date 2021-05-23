@@ -52,18 +52,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/{user:id}', [UserController::class, 'updatePassword'])->name('users.update');
+
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/setting', [VillageInfoController::class, 'show']);
+        Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
+
+        Route::resource('/citizen', CitizenController::class);
+
+        Route::resource('/family', FamilyController::class);
+
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/profile', [UserController::class, 'show'])->name('users.show');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
 });
 
-Route::middleware(['admin'])->group(function () {
-    Route::get('/setting', [VillageInfoController::class, 'show']);
-    Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
-
-    Route::resource('/citizen', CitizenController::class);
-
-    Route::resource('/family', FamilyController::class);
-
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/profile', [UserController::class, 'show'])->name('users.show');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
-});
