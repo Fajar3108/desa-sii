@@ -29,10 +29,10 @@ Route::get('/families', [FamilyController::class, 'index']);
 
 Route::get('/galleries', [GalleryController::class, 'index']);
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post}', [PostController::class, 'show']);
+Route::get('/article', [PostController::class, 'index']);
+Route::get('/article/{post}', [PostController::class, 'show']);
 
 Route::get('/village-info', [VillageInfoController::class, 'index']);
 
-Route::get('/category', [CategoryController::class, 'index']);
-Route::get('/category/{category}', [CategoryController::class, 'show']);
+Route::get('/album', [CategoryController::class, 'index']);
+Route::get('/album/{category}', [CategoryController::class, 'show']);
