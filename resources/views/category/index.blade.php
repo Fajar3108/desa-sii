@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Kategori')
+@section('title', 'Album')
 
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                        <h2>Semua Kategori</h2>
+                        <h2>Semua Album</h2>
                     </div>
                     <div class="col-6 text-right">
                         <a href="{{ route("category.create") }}" class="btn btn-primary btn-sm">Tambah</a>
@@ -23,7 +23,7 @@
                     <table class="table table-hover m-b-0 c_list">
                         <thead>
                             <tr>
-                                <th>Nama</th>
+                                <th>Nama Album</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

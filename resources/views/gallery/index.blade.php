@@ -3,6 +3,10 @@
 
 @section('content')
 <a href="{{ route('gallery.create') }}" class="btn btn-primary mb-4">Tambah</a>
+
+@if (request()->is('category/*'))
+<h3 class="mb-4">Album : {{ $galleries->first()->category->name }}</h3>
+@endif
 <div class="row clearfix">
     @foreach ($galleries as $gallery)
     <div class="col-md-3">

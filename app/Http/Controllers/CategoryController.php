@@ -17,8 +17,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        dd($category, $category->galleries);
-        return view('category.show', compact('category'));
+        $galleries = $category->galleries()->paginate(10);
+        return view('gallery.index', compact('galleries'));
     }
 
     public function create()
