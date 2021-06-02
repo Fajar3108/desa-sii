@@ -25,7 +25,7 @@
             @else
             <div class="row px-3">
                 @foreach ($sliders as $slider)
-                <div class="card col-4 p-1 m-0 position-relative">
+                <div class="card col-md-4 col-12 p-1 m-0 position-relative">
                     <img class="card-img-top" src="{{ str_contains($slider->image, "http") ? $slider->image : asset('storage/' . $slider->image) }}" alt="slider" style="width: 100%; object-fit: cover; height: 200px;">
                     <form action="{{ route('slider.destroy', $slider->id) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px;">
                         @method('DELETE')
