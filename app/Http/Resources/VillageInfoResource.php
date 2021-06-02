@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class VillageInfoResource extends JsonResource
 {
@@ -14,6 +15,16 @@ class VillageInfoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "name" => $this->name,
+            "address" => $this->address,
+            "description" => $this->description,
+            "no_hp" => $this->no_hp,
+            "email" => $this->email,
+            "start_day" => $this->start_day,
+            "end_day" => $this->end_day,
+            "start_time" => $this->start_time->format('H:i'),
+            "end_time" => $this->end_time->format('H:i'),
+        ];
     }
 }
