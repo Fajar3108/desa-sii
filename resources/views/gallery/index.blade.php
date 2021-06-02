@@ -12,7 +12,7 @@
     @foreach ($galleries as $gallery)
     <div class="col-md-3">
         <div class="card">
-            <img src="{{ "storage/" . $gallery->image }}" class="card-img-top" style="object-fit: cover;">
+            <img src="{{ str_contains($gallery->image, "http") ? $gallery->image : asset("storage/" . $gallery->image) }}" class="card-img-top" style="object-fit: cover;">
             <div class="card-body">
                 <form action="{{ route("gallery.destroy", $gallery->id) }}" method="POST" class="mb-0">
                     @method('DELETE')
