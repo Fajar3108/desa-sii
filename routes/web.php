@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     GalleryController,
     VillageInfoController,
     CategoryController,
+    SliderController,
     UserController
 };
 
@@ -65,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [UserController::class, 'show'])->name('users.show');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+        Route::resource('slider', SliderController::class)->only('store', 'destroy');
     });
 });
 
