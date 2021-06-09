@@ -32,14 +32,8 @@
                         <li class="{{ Request::segment(1) === 'citizen' ? 'active' : null }}">
                             <a href="{{ route('citizen.index') }}"><i class="icon-users"></i> <span>Penduduk</span></a>
                         </li>
-                        <li class="{{ Request::segment(1) === 'family' ? 'active' : null }}">
-                            <a href="{{ route('family.index') }}"><i class="icon-heart"></i> <span>Keluarga</span></a>
-                        </li>
 
                         @endif
-                        <li class="{{ Request::segment(1) === 'gallery' ? 'active' : null }}">
-                            <a href="{{ route('gallery.index') }}"><i class="icon-camera"></i> <span>Gallery</span></a>
-                        </li>
                         <li class="{{ Request::segment(1) === 'category' ? 'active' : null }}">
                             <a href="/category"><i class="icon-folder"></i> <span>Album</span></a>
                         </li>

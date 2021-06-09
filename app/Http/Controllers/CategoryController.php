@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 
@@ -18,13 +17,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $galleries = $category->galleries()->paginate(10);
-        $album = $category->name;
-        return view('gallery.index', compact('galleries', 'album'));
-    }
-
-    public function create()
-    {
-        return view('category.create', ['category' => new Category]);
+        return view('gallery.show', compact('galleries', 'category'));
     }
 
     public function store(CategoryRequest $request)

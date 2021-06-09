@@ -1,61 +1,41 @@
 @extends('layout.master')
 @section('title', 'Album')
 
-
 @section('content')
+<form action="{{ route('category.store') }}" method="POST">
+    @csrf
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nama Album" aria-label="Recipient's username" aria-describedby="basic-addon2" name="name">
+        <button class="btn btn-primary input-group-append">
+            Tambah Album
+        </button>
+    </div>
+</form>
 
 <div class="row clearfix">
-
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="header">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h2>Semua Album</h2>
-                    </div>
-                    <div class="col-6 text-right">
-                        <a href="{{ route("category.create") }}" class="btn btn-primary btn-sm">Tambah</a>
-                    </div>
+    @foreach ($categories as $category)
+    <div class="col-md-3 mb-4" >
+        <a href="{{ route('category.show', $category->id) }}">
+            <div class="card m-0 album-card"  style="height: 200px; background-color: #aaa;">
+                @isset($category->galleries->first()->image)
+                <img src="{{ str_contains($category->galleries->first()->image, "http") ? $category->galleries->first()->image : asset('storage/' . $category->galleries->first()->image) }}" class="card-img-top" alt="..." style="object-fit: cover; height: 100%">
+                @endif
+                <form action="{{ route('category.destroy', $category->id) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px; z-index: 99">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
+                </form>
+                <div class="card-img-overlay text-light rounded cat-cap" style="background-color: rgba(0,0,0,.5);">
+                    <h5 class="card-title">{{ $category->name }}</h5>
+                    <p class="card-text">Terdapat {{ $category->galleries->count() }} gambar dalam album ini</p>
                 </div>
             </div>
-            <div class="body">
-                <div class="table-responsive">
-                    <table class="table table-hover m-b-0 c_list">
-                        <thead>
-                            <tr>
-                                <th>Nama Album</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                            <tbody>
-                                @foreach ($categories as $category)
-                                <tr>
-                                    <td>
-                                        {{ $category->name }}
-                                    </td>
-                                    <td>
-
-                                        <form action="{{ route("category.destroy", $category->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <a href="{{ route('category.show', $category->id) }}" class="btn btn-success" title="Show"><i class="fa fa-eye"></i></a>
-                                            <a href="{{ route('category.edit', $category->id) }}" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>
-
-                                            <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="mt-3">
-                {{ $categories->links() }}
-            </div>
-        </div>
+        </a>
     </div>
-
+    @endforeach
+    <div class="mt-3">
+        {{ $categories->links() }}
+    </div>
 </div>
 
 <script>

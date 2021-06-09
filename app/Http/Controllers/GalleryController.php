@@ -2,37 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\GalleryRequest;
+use Illuminate\Http\Request;
 use App\Helpers\ImageHandler;
 use App\Models\{Gallery, Category};
 
 class GalleryController extends Controller
 {
-    public function index()
-    {
-        $galleries = Gallery::latest()->paginate(10);
-
-        return view('gallery.index', compact('galleries'));
-    }
-
-    public function show(Gallery $gallery)
-    {
-        return view('gallery.show', compact('gallery'));
-    }
-
-    public function create()
-    {
-        $categories = Category::all();
-
-        $gallery = new Gallery;
-        $gallery->category = new Category;
-
-        return view('gallery.create', compact('categories', 'gallery'));
-    }
-
-    public function store(GalleryRequest $request)
+    public function store(Category $category, Request $request)
     {
         $request->validate([
             'image' => 'required'
@@ -40,39 +17,12 @@ class GalleryController extends Controller
 
         $image = ImageHandler::store($request->image, 'galleries');
 
-        Gallery::create([
-            'image' => $image,
-            'category_id' => $request->category_id
-        ]);
+        $category->galleries()->create(['image' => $image]);
 
-        return redirect('/gallery');
+        return redirect()->route('category.show', $category->id);
     }
 
-    public function edit(Gallery $gallery)
-    {
-        $categories = Category::all();
-
-        return view('gallery.edit', compact('gallery', 'categories'));
-    }
-
-    public function update(GalleryRequest $request, Gallery $gallery)
-    {
-        if($request->file('image')){
-            Storage::disk('public')->delete($gallery->image);
-            $image = ImageHandler::store($request->image, 'galleries');
-        } else{
-            $image = $gallery->image;
-        }
-
-        $gallery->update([
-            'image' => $image,
-            'category_id' => $request->category_id
-        ]);
-
-        return redirect('/gallery');
-    }
-
-    public function destroy(Gallery $gallery)
+    public function destroy(Category $category, Gallery $gallery)
     {
         Storage::disk('public')->delete($gallery->image);
         $gallery->delete();

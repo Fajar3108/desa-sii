@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     CitizenController,
-    FamilyController,
     PostController,
     GalleryController,
     VillageInfoController,
@@ -36,17 +35,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/citizen', CitizenController::class);
 
-    Route::resource('/family', FamilyController::class);
-
     Route::resource('/post', PostController::class);
     Route::post('post/upload', [PostController::class, 'upload'])->name("upload.store");
 
-    Route::resource('/gallery', GalleryController::class);
+    Route::resource('/category/{category:id}/gallery', GalleryController::class)->only('store', 'destroy');
 
     Route::get('/setting', [VillageInfoController::class, 'show']);
     Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
 
-    Route::resource('/category', CategoryController::class);
+    Route::resource('/category', CategoryController::class)->only('index', 'show', 'store', 'destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [UserController::class, 'show'])->name('users.show');
@@ -59,8 +56,6 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
 
         Route::resource('/citizen', CitizenController::class);
-
-        Route::resource('/family', FamilyController::class);
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/profile', [UserController::class, 'show'])->name('users.show');
