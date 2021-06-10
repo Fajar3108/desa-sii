@@ -17,8 +17,8 @@
     <div class="col-md-3 mb-4" >
         <a href="{{ route('category.show', $category->id) }}">
             <div class="card m-0 album-card"  style="height: 200px; background-color: #aaa;">
-                @isset($category->galleries->first()->image)
-                <img src="{{ str_contains($category->galleries->first()->image, "http") ? $category->galleries->first()->image : asset('storage/' . $category->galleries->first()->image) }}" class="card-img-top" alt="..." style="object-fit: cover; height: 100%">
+                @isset($category->galleries[$category->galleries->count() - 1]->image)
+                <img src="{{ str_contains($category->galleries[$category->galleries->count() - 1]->image, "http") ? $category->galleries[$category->galleries->count() - 1]->image : asset('storage/' . $category->galleries[$category->galleries->count() - 1]->image) }}" class="card-img-top" alt="..." style="object-fit: cover; height: 100%">
                 @endif
                 <form action="{{ route('category.destroy', $category->id) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px; z-index: 99">
                     @method('DELETE')

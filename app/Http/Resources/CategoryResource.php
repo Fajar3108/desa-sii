@@ -17,7 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'thumbnail' => $this->galleries()->first()->image ?? "",
+            'thumbnail' => $this->galleries[$this->galleries->count() - 1]->image ?? "",
             'galleries' => $this->galleries
         ];
     }
