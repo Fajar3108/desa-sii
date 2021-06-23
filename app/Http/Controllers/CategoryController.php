@@ -9,14 +9,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::orderBy('id', 'DESC')->paginate(10);
 
         return view('category.index', compact('categories'));
     }
 
     public function show(Category $category)
     {
-        $galleries = $category->galleries()->paginate(10);
+        $galleries = $category->galleries()->orderBy('id', 'DESC')->paginate(10);
         return view('gallery.show', compact('galleries', 'category'));
     }
 

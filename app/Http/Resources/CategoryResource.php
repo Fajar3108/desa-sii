@@ -18,7 +18,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'thumbnail' => $this->galleries[$this->galleries->count() - 1]->image ?? "",
-            'galleries' => $this->galleries
+            'galleries' => $this->galleries()->orderBy('id', 'DESC')->get()
         ];
     }
 }

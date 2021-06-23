@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return CategoryResource::collection(Category::paginate(request()->per_page, ['*'], 'page', request()->page));
+        return CategoryResource::collection(Category::orderBy('id', 'DESC')->paginate(request()->per_page, ['*'], 'page', request()->page));
     }
 
     public function show(Category $category)
