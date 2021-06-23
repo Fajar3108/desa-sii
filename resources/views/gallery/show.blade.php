@@ -22,7 +22,7 @@
     <div class="col-md-3 mb-4" >
         <div class="card m-0 album-card"  style="height: 200px; background-color: #aaa;">
             <img src="{{ str_contains($gallery->image, "http") ? $gallery->image : asset('storage/' . $gallery->image) }}" class="card-img-top" alt="..." style="object-fit: cover; height: 100%">
-            <form action="{{ route('gallery.destroy', [$category->id, $gallery->id]) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px; z-index: 99">
+            <form action="{{ route('gallery.destroy', [$category->id, $gallery->id]) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px;">
                 @method('DELETE')
                 @csrf
                 <button class="btn btn-danger rounded-circle"><h5 style="display: inline">&times;</h5></button>

@@ -20,7 +20,7 @@
                 @isset($category->galleries[$category->galleries->count() - 1]->image)
                 <img src="{{ str_contains($category->galleries[$category->galleries->count() - 1]->image, "http") ? $category->galleries[$category->galleries->count() - 1]->image : asset('storage/' . $category->galleries[$category->galleries->count() - 1]->image) }}" class="card-img-top" alt="..." style="object-fit: cover; height: 100%">
                 @endif
-                <form action="{{ route('category.destroy', $category->id) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px; z-index: 99">
+                <form action="{{ route('category.destroy', $category->id) }}" method="POST" class="position-absolute" style="top: 10px; right: 10px; z-index: 1">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
