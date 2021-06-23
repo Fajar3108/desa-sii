@@ -21,8 +21,9 @@ class CitizenFactory extends Factory
      */
     public function definition()
     {
+        $kk = ['3274567890123456', '3274567893122456', '3274567890223411', '3274567890123252', '3274567890133456', '3274567192123436', '3274527495123456', '3274567890124426'];
         return [
-            'family_id' => Family::firstOrCreate(['number' => rand(1111111111111111, 9999999999999999)])->id,
+            'family_id' => Family::firstOrCreate(['number' => $kk[rand(0, count($kk) - 1)]])->id,
             'nik' => $this->faker->unique()->numberBetween(1111111111111111, 9999999999999999),
             'name' => $this->faker->name,
             'no_hp' => $this->faker->e164PhoneNumber,

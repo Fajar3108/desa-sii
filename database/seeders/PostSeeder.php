@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Citizen;
+use App\Models\Post;
 
-class CitizenSeeder extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class CitizenSeeder extends Seeder
      */
     public function run()
     {
-        Citizen::factory(50)->create();
+        Post::factory(50)->create();
     }
 }

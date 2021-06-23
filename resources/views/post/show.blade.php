@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <img src="{{ asset("storage/" . $post->thumbnail) }}">
+    <img src="{{ str_contains($post->thumbnail, "http") ? $post->thumbnail : asset("storage/" . $post->thumbnail) }}">
     <h1>{{ $post->title }}</h1>
     {!! $post->description !!}
     @foreach ($post->tags as $tag)
