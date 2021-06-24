@@ -30,6 +30,9 @@
             <option selected>{{ $tag->slug }}</option>
         @endforeach
     </select>
+    @error('tags')
+    <small class="text-danger">{{ $message }}</small>
+    @enderror
 </div>
 
 
