@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CitizenRequest;
 use App\Models\{Citizen, Family};
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CitizenController extends Controller
 {
@@ -44,6 +45,8 @@ class CitizenController extends Controller
             'address' => $request->address
         ]);
 
+        ALert::success('Success', 'Citizen created successfuly');
+
         return redirect('/citizen');
     }
 
@@ -68,12 +71,16 @@ class CitizenController extends Controller
             'family_id' => $request->kk
         ]);
 
+        ALert::success('Success', 'Citizen updated successfuly');
+
         return redirect('/citizen');
     }
 
     public function destroy(Citizen $citizen)
     {
         $citizen->delete();
+
+        ALert::success('Success', 'Citizen deleted successfuly');
 
         return redirect('/citizen');
     }

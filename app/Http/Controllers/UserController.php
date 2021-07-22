@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -24,6 +25,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        ALert::success('Success', 'User created successfuly');
+
         return redirect('/users');
     }
 
@@ -43,12 +46,22 @@ class UserController extends Controller
             'password' => bcrypt(request()->password),
         ]);
 
+        ALert::success('Success', 'User password updated successfuly');
+
         return redirect()->back();
     }
 
     public function destroy(User $user)
     {
+        if ($user->id == auth()->user()->id) {
+            ALert::success('Error', "Can't delete your self");
+
+            return redirect()->back();
+        }
+
         $user->delete();
+
+        ALert::success('Success', 'User deleted successfuly');
 
         return redirect()->back();
     }

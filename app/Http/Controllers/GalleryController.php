@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Helpers\ImageHandler;
 use App\Models\{Gallery, Category};
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GalleryController extends Controller
 {
@@ -19,6 +20,8 @@ class GalleryController extends Controller
 
         $category->galleries()->create(['image' => $image]);
 
+        ALert::success('Success', 'Gallery created successfuly');
+
         return redirect()->route('category.show', $category->id);
     }
 
@@ -26,6 +29,8 @@ class GalleryController extends Controller
     {
         Storage::disk('public')->delete($gallery->image);
         $gallery->delete();
+
+        ALert::success('Success', 'Gallery deleted successfuly');
 
         return redirect()->back();
     }

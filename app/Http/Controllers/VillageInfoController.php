@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\VillageInfoRequest;
 use App\Models\Slider;
 use App\Models\VillageInfo;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class VillageInfoController extends Controller
 {
@@ -21,6 +21,8 @@ class VillageInfoController extends Controller
     {
         $info = VillageInfo::find($id)->first();
         $info->update($request->all());
+
+        ALert::success('Success', 'Village info updated successfuly');
 
         return redirect()->back();
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Family;
 use App\Http\Requests\FamilyRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FamilyController extends Controller
 {
@@ -24,6 +25,8 @@ class FamilyController extends Controller
     {
         Family::create($request->all());
 
+        ALert::success('Success', 'Family created successfuly');
+
         return redirect('/family');
     }
 
@@ -36,6 +39,8 @@ class FamilyController extends Controller
     {
         $family->update($request->all());
 
+        ALert::success('Success', 'Family updated successfuly');
+
         return redirect('/family');
     }
 
@@ -43,6 +48,8 @@ class FamilyController extends Controller
     {
         $family->citizens()->delete();
         $family->delete();
+
+        ALert::success('Success', 'Family deleted successfuly');
 
         return redirect('/family');
     }

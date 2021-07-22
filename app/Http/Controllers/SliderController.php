@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Helpers\ImageHandler;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SliderController extends Controller
 {
@@ -23,6 +24,8 @@ class SliderController extends Controller
 
         Slider::create(['image' => $image]);
 
+        ALert::success('Success', 'Slider created successfuly');
+
         return back();
     }
 
@@ -30,6 +33,8 @@ class SliderController extends Controller
     {
         Storage::disk('public')->delete($slider->image);
         $slider->delete();
+
+        ALert::success('Success', 'Slider deleted successfuly');
 
         return redirect()->back();
     }

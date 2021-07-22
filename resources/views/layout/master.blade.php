@@ -11,6 +11,7 @@
         <meta name="author" content="@yield('meta_author', config('app.name'))">
         @yield('meta')
 
+
         {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
         @stack('before-styles')
 
@@ -58,10 +59,6 @@
 
 		@if (Request::segment(2) === 'calendar' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/fullcalendar.min.css') }}"/>
-        @endif
-
-        @if (Request::segment(2) === 'contact-list' or Request::segment(2) === 'contact-card' or Request::segment(2) === 'inbox' or Request::segment(2) === 'taskboard' or Request::segment(2) === 'dialogs' )
-			<link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
         @endif
 
         @if (Request::segment(2) === 'taskboard' )
@@ -150,7 +147,6 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}"/>
             <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}"/>
             <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
         @endif
 
         @if (Request::segment(2) === 'dragger' )
@@ -257,6 +253,8 @@
 
         </div>
 
+        @include('sweetalert::alert')
+
         <!-- Scripts -->
         @stack('before-scripts')
 
@@ -313,11 +311,6 @@
             <script src="{{ asset('assets/vendor/nestable/jquery.nestable.js') }}"></script> <!-- Jquery Nestable -->
             <script src="{{ asset('assets/js/pages/ui/sortable-nestable.js') }}"></script>
             <script src="{{ asset('assets/js/index6.js') }}"></script>
-        @endif
-
-        @if (Request::segment(2) === 'inbox' or Request::segment(2) === 'contact-list' or Request::segment(2) === 'taskboard' or Request::segment(2) === 'dialogs' )
-            <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
-			<script src="{{ asset('assets/js/pages/ui/dialogs.js') }}"></script>
         @endif
 
         @if (Request::segment(2) === 'calendar' )
@@ -458,7 +451,6 @@
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
             <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
         @endif
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\PostRequest;
 use App\Helpers\ImageHandler;
 use App\Models\{Post, Tag};
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
@@ -45,6 +46,8 @@ class PostController extends Controller
         ]);
 
         $post->tags()->attach($tags);
+
+        ALert::success('Success', 'Post created successfuly');
 
         return redirect('/post');
     }
@@ -87,6 +90,8 @@ class PostController extends Controller
 
         $post->tags()->sync($tags);
 
+        ALert::success('Success', 'Post updated successfuly');
+
         return redirect('/post');
     }
 
@@ -95,6 +100,7 @@ class PostController extends Controller
         Storage::disk('public')->delete($post->thumbnail);
         $post->tags()->detach();
         $post->delete();
+        ALert::success('Success', 'Post deleted successfuly');
         return redirect('/post');
     }
 

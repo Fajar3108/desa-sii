@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -24,6 +25,8 @@ class CategoryController extends Controller
     {
         Category::create($request->all());
 
+        ALert::success('Success', 'Category created successfuly');
+
         return redirect('/category');
     }
 
@@ -36,6 +39,8 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
+        ALert::success('Success', 'Category updated successfuly');
+
         return redirect('/category');
     }
 
@@ -43,6 +48,8 @@ class CategoryController extends Controller
     {
         $category->galleries()->delete();
         $category->delete();
+
+        ALert::success('Success', 'Category deleted successfuly');
 
         return redirect('/category');
     }

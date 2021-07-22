@@ -1,6 +1,16 @@
 @extends('layout.master')
 @section('title', 'Artikel')
 
+@section('custom-style');
+<style>
+.post-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+</style>
+
 @section('content')
 <div class="row clearfix">
     <div class="col-lg-12">
@@ -28,7 +38,7 @@
                                 @foreach ($posts as $post)
                                 <tr>
                                     <td>
-                                        {{ $post->title }}
+                                        <p class="post-title mb-0">{{ $post->title }}</p>
                                     </td>
 
                                     <td>
