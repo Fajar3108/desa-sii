@@ -17,8 +17,8 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'thumbnail' => $this->galleries[$this->galleries->count() - 1]->image ?? "",
-            'galleries' => $this->galleries()->orderBy('id', 'DESC')->get()
+            'thumbnail' => str_contains($this->galleries[$this->galleries->count() - 1]->image, 'http') ? $this->galleries[$this->galleries->count() - 1]->image : asset('galleries', $this->galleries[$this->galleries->count() - 1]->image),
+            'galleries' => GalleryResource::collection($this->galleries()->orderBy('id', 'DESC')->get())
         ];
     }
 }

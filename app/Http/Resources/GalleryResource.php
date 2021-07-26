@@ -16,7 +16,7 @@ class GalleryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image,
+            'image' => str_contains($this->image, 'http') ? $this->image : asset('storage/' . $this->image),
             'category' => $this->category
         ];
     }
