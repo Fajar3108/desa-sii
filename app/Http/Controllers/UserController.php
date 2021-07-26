@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -49,6 +50,17 @@ class UserController extends Controller
         ALert::success('Success', 'User password updated successfuly');
 
         return redirect()->back();
+    }
+
+    public function updateRole(User $user, Request $request)
+    {
+        $user->update([
+            'role_id' => $request->role
+        ]);
+
+        ALert::success('Success', "User's role updated successfuly");
+
+        return back();
     }
 
     public function destroy(User $user)
