@@ -8,7 +8,8 @@ use App\Http\Controllers\Api\{
     GalleryController,
     PostController,
     VillageInfoController,
-    CategoryController
+    CategoryController,
+    UserController
 };
 
 /*
@@ -36,3 +37,11 @@ Route::get('/village-info', [VillageInfoController::class, 'index']);
 
 Route::get('/album', [CategoryController::class, 'index']);
 Route::get('/album/{category}', [CategoryController::class, 'show']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::delete('citizens', [CitizenController::class, 'massDestroy']);
+    Route::delete('album', [CategoryController::class, 'massDestroy']);
+    Route::delete('article', [PostController::class, 'massDestroy']);
+    Route::delete('galleries', [GalleryController::class, 'massDestroy']);
+    Route::delete('users', [UserController::class, 'massDestroy']);
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
 use App\Models\Page;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PageController extends Controller
@@ -46,5 +47,19 @@ class PageController extends Controller
         Alert::success('Success', 'Page deleted successfuly');
 
         return back();
+    }
+
+    public function massDestroy(Request $request)
+    {
+        $ids = $request->ids;
+
+        if (!isset($ids)) {
+            return response()->json([
+                'message' => "please select at least one data you want to delete"
+            ], 404);
+        }
+
+        Page::whereIn('id', $ids)->delete();
+        return response()->json(['message '=>"Pages Deleted successfully."]);
     }
 }

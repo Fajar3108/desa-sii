@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CitizenRequest;
 use App\Models\{Citizen, Family};
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CitizenController extends Controller
