@@ -44,6 +44,50 @@
 <div class="row clearfix">
     <div class="col-md-12">
         <div class="card">
+            <div class="header">
+                <h2>Menu</h2>
+                <form action="" method="POST" class="mt-3">
+                    <div class="d-flex">
+                        <input type="text" placeholder="Menu Name" class="form-control">
+                        <input type="text" placeholder="Url" class="form-control">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="mt-3">
+                        <small class="text-danger">* Error</small>
+                    </div>
+                </form>
+            </div>
+            <div class="body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Url</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Store</td>
+                            <td><a href="#">https://cirendeu.store.com</a></td>
+                            <td>
+                                <form action="" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
             <div class="body">
                 <form action="{{ route('setting.update', $info->id) }}" method="POST">
                     @csrf
@@ -167,5 +211,16 @@
     </div>
   </div>
 </div>
+
+
+<script>
+    function handler(e) {
+        const result = confirm('Apa anda yakin ? semua gallery dengan category ini akan di hapus');
+
+        if (!result) {
+            e.preventDefault();
+        }
+    }
+</script>
 
 @stop
