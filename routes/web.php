@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     VillageInfoController,
     CategoryController,
     SliderController,
-    UserController
+    UserController,
+    PageController
 };
 
 /*
@@ -63,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/users/{user:id}', [UserController::class, 'destroy'])->name('users.destroy');
 
         Route::resource('slider', SliderController::class)->only('store', 'destroy');
+
+        Route::resource('page', PageController::class)->only('store', 'destroy');
     });
 });
 

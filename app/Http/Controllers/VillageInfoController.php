@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VillageInfoRequest;
-use App\Models\Slider;
-use App\Models\VillageInfo;
+use App\Models\{VillageInfo, Slider, Page};
 use RealRashid\SweetAlert\Facades\Alert;
 
 class VillageInfoController extends Controller
@@ -13,8 +12,9 @@ class VillageInfoController extends Controller
     {
         $info = VillageInfo::first();
         $sliders = Slider::all();
+        $pages = Page::latest()->paginate(10);
 
-        return view('setting.index', compact('info', 'sliders'));
+        return view('setting.index', compact('info', 'sliders', 'pages'));
     }
 
     public function update(VillageInfoRequest $request, $id)

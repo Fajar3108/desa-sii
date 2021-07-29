@@ -4,23 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
 use App\Models\Page;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PageController extends Controller
 {
-    public function index()
-    {
-        $pages = Page::paginate(10)->latest();
-
-        return view('pages.index', compact('pages'));
-    }
-
     public function store(PageRequest $request)
     {
         Page::create([
-            'name' => $request->name,
-            'url' => $request->url,
+            'name' => $request->page_name,
+            'url' => $request->page_url,
         ]);
 
         Alert::success('Success', 'Page created successfuly');
@@ -31,8 +23,8 @@ class PageController extends Controller
     public function update(Page $page, PageRequest $request)
     {
         $page->update([
-            'name' => $request->name,
-            'url' => $request->url,
+            'name' => $request->page_name,
+            'url' => $request->page_url,
         ]);
 
         Alert::success('Success', 'Page updated successfuly');

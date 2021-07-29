@@ -46,38 +46,49 @@
         <div class="card">
             <div class="header">
                 <h2>Menu</h2>
-                <form action="" method="POST" class="mt-3">
+                <form action="{{ route('page.store') }}" method="POST" class="mt-3">
+                    @csrf
                     <div class="d-flex">
-                        <input type="text" placeholder="Menu Name" class="form-control">
-                        <input type="text" placeholder="Url" class="form-control">
-                        <button class="btn btn-primary">Submit</button>
+                        <input type="text" placeholder="Menu Name" class="form-control" name="page_name">
+                        <input type="text" placeholder="Url" class="form-control" name="page_url">
+                        <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
+                    @if ($errors->any())
                     <div class="mt-3">
-                        <small class="text-danger">* Error</small>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>
+                                <small class="text-danger">{{ $error }}</small>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
+                    @endif
                 </form>
             </div>
             <div class="body">
                 <table class="table">
-                    <thead>
+                    <thead class="bg-dark text-white">
                         <tr>
-                            <th>Name</th>
+                            <th>Menu Name</th>
                             <th>Url</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($pages as $page)
                         <tr>
-                            <td>Store</td>
-                            <td><a href="#">https://cirendeu.store.com</a></td>
+                            <td>{{ $page->name }}</td>
+                            <td><a href="{{ $page->url }}" target="_blank">{{ $page->url }}</a></td>
                             <td>
-                                <form action="" method="POST">
+                                <form action="{{ route('page.destroy', $page->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
+                                    <button type="submit" class="btn btn-danger" title="Delete" onclick="deleteHandler(event)"><i class="fa fa-trash-o"></i></button>
                                 </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -214,8 +225,8 @@
 
 
 <script>
-    function handler(e) {
-        const result = confirm('Apa anda yakin ? semua gallery dengan category ini akan di hapus');
+    function deleteHandler(e) {
+        const result = confirm('Apa anda yakin ?');
 
         if (!result) {
             e.preventDefault();
