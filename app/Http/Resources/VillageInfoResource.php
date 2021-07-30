@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Page;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Slider;
 
@@ -26,6 +27,7 @@ class VillageInfoResource extends JsonResource
             "start_time" => $this->start_time->format('H:i'),
             "end_time" => $this->end_time->format('H:i'),
             "sliders" => SliderResource::collection(Slider::all()),
+            "menu" => Page::latest()->get(),
         ];
     }
 }

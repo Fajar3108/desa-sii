@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 class CategoryResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'thumbnail' => str_contains($this->galleries[$this->galleries->count() - 1]->image, 'http') ? $this->galleries[$this->galleries->count() - 1]->image : asset('galleries', $this->galleries[$this->galleries->count() - 1]->image),
+            'thumbnail' => str_contains($this->galleries[$this->galleries->count() - 1]->image, 'http') ? $this->galleries[$this->galleries->count() - 1]->image : asset('storage/' . $this->galleries()->latest()->first()->image),
             'galleries' => GalleryResource::collection($this->galleries()->orderBy('id', 'DESC')->get())
         ];
     }

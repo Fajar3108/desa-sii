@@ -8,6 +8,13 @@ use App\Models\Page;
 
 class PageController extends Controller
 {
+    public function index()
+    {
+        $pages = Page::latest()->get();
+
+        return response()->json($pages);
+    }
+
     public function massDestroy(Request $request)
     {
         $ids = $request->ids;
