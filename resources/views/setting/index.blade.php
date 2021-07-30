@@ -53,14 +53,19 @@
                         <input type="text" placeholder="Url" class="form-control" name="page_url">
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
-                    @if ($errors->any())
+                    @if($errors->page_name || $errors->page_url)
                     <div class="mt-3">
                         <ul>
-                            @foreach ($errors->all() as $error)
+                            @error('page_name')
                             <li>
-                                <small class="text-danger">{{ $error }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                             </li>
-                            @endforeach
+                            @enderror
+                            @error('page_url')
+                            <li>
+                                <small class="text-danger">{{ $message }}</small>
+                            </li>
+                            @enderror
                         </ul>
                     </div>
                     @endif
