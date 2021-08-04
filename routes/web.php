@@ -53,7 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/users/{user:id}', [UserController::class, 'updatePassword'])->name('users.update');
 
     Route::middleware(['admin'])->group(function () {
-        Route::get('/setting', [VillageInfoController::class, 'show']);
+        Route::get('/setting', [VillageInfoController::class, 'setting']);
+        Route::get('/slider', [VillageInfoController::class, 'slider']);
+
         Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
 
         Route::resource('/citizen', CitizenController::class);

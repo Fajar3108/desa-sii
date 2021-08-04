@@ -41,8 +41,12 @@
                             <a href="{{ route('post.index') }}"><i class="icon-folder"></i> <span>Artikel</span></a>
                         </li>
                         @if (auth()->user()->role->name == 'admin')
-                        <li class="{{ Request::segment(1) === 'setting' ? 'active' : null }}">
-                            <a href="/setting"><i class="icon-wrench"></i> <span>Pengaturan</span></a>
+                        <li class="dropdown">
+                            <a role="button" class="dropdown-toggle" id="dropdownMenuSetting" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-wrench"></i> <span>Pengaturan</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuSetting">
+                                <li><a class="dropdown-item {{ Request::segment(1) === 'setting' ? 'active text-white' : null }}" href="/setting">General</a></li>
+                                <li><a class="dropdown-item {{ Request::segment(1) === 'slider' ? 'active text-white' : null }}" href="/slider">Slider</a></li>
+                            </ul>
                         </li>
                         @endif
                     </ul>

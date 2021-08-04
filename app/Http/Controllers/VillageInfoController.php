@@ -8,12 +8,18 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class VillageInfoController extends Controller
 {
-    public function show()
+    public function setting()
     {
         $info = VillageInfo::first();
+
+        return view('setting.settings', compact('info'));
+    }
+
+    public function slider()
+    {
         $sliders = Slider::all();
 
-        return view('setting.index', compact('info', 'sliders'));
+        return view('setting.slider', compact('sliders'));
     }
 
     public function update(VillageInfoRequest $request, $id)
