@@ -12,9 +12,8 @@ class VillageInfoController extends Controller
     {
         $info = VillageInfo::first();
         $sliders = Slider::all();
-        $pages = Page::latest()->paginate(10);
 
-        return view('setting.index', compact('info', 'sliders', 'pages'));
+        return view('setting.index', compact('info', 'sliders'));
     }
 
     public function update(VillageInfoRequest $request, $id)

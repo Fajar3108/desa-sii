@@ -44,66 +44,6 @@
 <div class="row clearfix">
     <div class="col-md-12">
         <div class="card">
-            <div class="header">
-                <h2>Menu</h2>
-                <form action="{{ route('page.store') }}" method="POST" class="mt-3">
-                    @csrf
-                    <div class="d-flex">
-                        <input type="text" placeholder="Menu Name" class="form-control" name="page_name">
-                        <input type="text" placeholder="Url" class="form-control" name="page_url">
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                    @if($errors->page_name || $errors->page_url)
-                    <div class="mt-3">
-                        <ul>
-                            @error('page_name')
-                            <li>
-                                <small class="text-danger">{{ $message }}</small>
-                            </li>
-                            @enderror
-                            @error('page_url')
-                            <li>
-                                <small class="text-danger">{{ $message }}</small>
-                            </li>
-                            @enderror
-                        </ul>
-                    </div>
-                    @endif
-                </form>
-            </div>
-            <div class="body">
-                <table class="table">
-                    <thead class="bg-dark text-white">
-                        <tr>
-                            <th>Menu Name</th>
-                            <th>Url</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pages as $page)
-                        <tr>
-                            <td>{{ $page->name }}</td>
-                            <td><a href="{{ $page->url }}" target="_blank">{{ $page->url }}</a></td>
-                            <td>
-                                <form action="{{ route('page.destroy', $page->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger" title="Delete" onclick="deleteHandler(event)"><i class="fa fa-trash-o"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row clearfix">
-    <div class="col-md-12">
-        <div class="card">
             <div class="body">
                 <form action="{{ route('setting.update', $info->id) }}" method="POST">
                     @csrf

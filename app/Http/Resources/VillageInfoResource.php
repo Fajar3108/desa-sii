@@ -27,7 +27,6 @@ class VillageInfoResource extends JsonResource
             "start_time" => $this->start_time->format('H:i'),
             "end_time" => $this->end_time->format('H:i'),
             "sliders" => SliderResource::collection(Slider::all()),
-            "menu" => Page::latest()->get(),
         ];
     }
 }
