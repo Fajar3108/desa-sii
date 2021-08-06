@@ -7,9 +7,6 @@
 <div class="vertical-align-wrap">
 	<div class="vertical-align-middle auth-main">
 		<div class="auth-box">
-            {{-- <div class="top">
-                <img src="{{url('/')}}/assets/img/logo-white.svg" alt="Lucid">
-            </div> --}}
 			<div class="card">
                 <div class="header">
                     <p class="lead">Login to your account</p>
