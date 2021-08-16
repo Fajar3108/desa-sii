@@ -13,6 +13,17 @@
 
 @section('content')
 <div class="row clearfix">
+    <div class="col-12">
+        <form action="{{ route('post.index') }}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cari judul artikel disini..." aria-describedby="searchButton" name="keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="header">

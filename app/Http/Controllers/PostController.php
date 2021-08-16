@@ -14,7 +14,12 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+
+        if (request()->keyword) {
+            $posts = Post::where('title', 'LIKE', '%' . request()->keyword . '%')->orderBy('created_at', 'DESC')->paginate(10);
+        } else {
+            $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+        }
 
         return view('post.index', compact('posts'));
     }
