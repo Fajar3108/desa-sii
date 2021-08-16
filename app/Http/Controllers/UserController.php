@@ -11,7 +11,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $keyword = request()->keyword;
+        if ($keyword) {
+            $users = User::where('name', 'LIKE', "%$keyword%" )->orWhere('username', 'LIKE', "%$keyword%")->orWhere('email', 'LIKE', "%$keyword%")->latest()->paginate(10);
+        } else {
+            $users = User::latest()->paginate(10);
+        }
 
         return view('users.index', compact('users'));
     }
