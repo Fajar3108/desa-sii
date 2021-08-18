@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('slider', SliderController::class)->only('store', 'destroy');
 
-        Route::resource('page', PageController::class)->only('store', 'destroy');
+        Route::resource('page', PageController::class)->only('store', 'destroy', 'index', 'update');
     });
 });
 
