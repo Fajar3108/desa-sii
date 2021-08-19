@@ -55,4 +55,19 @@
         <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
-<br>
+<div class="form-group row">
+    <div class="col-6">
+        <label>RT</label>
+        <input type="number" value="{{ old('rt') ?? $citizen->rt }}" name="rt" class="form-control" required>
+        @error('rt')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+    </div>
+    <div class="col-6">
+        <label>RW</label>
+        <input type="number" value="{{ old('rw') ?? $citizen->rw }}" name="rw" class="form-control" required>
+        @error('rw')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+    </div>
+</div>

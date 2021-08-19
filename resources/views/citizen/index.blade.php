@@ -37,6 +37,7 @@
                                 <th>No Telp</th>
                                 <th>Tanggal lahir</th>
                                 <th>Alamat</th>
+                                <th>RT/RW</th>
                                 <th>Jenis kelamin</th>
                                 <th>Action</th>
                             </tr>
@@ -55,6 +56,9 @@
                                     </td>
                                     <td>
                                         <span><i class="zmdi"></i>{{ $citizen->address }}</span>
+                                    </td>
+                                    <td>
+                                        <span><i class="zmdi"></i>{{ $citizen->rt }}/{{ $citizen->rw }}</span>
                                     </td>
                                     <td>
                                         <address><i class="zmdi zmdi-pin"></i>{{ $citizen->gender == 'L' ? 'Laki - laki' : 'Perempuan' }}</address>

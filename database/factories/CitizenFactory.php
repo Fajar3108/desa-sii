@@ -29,6 +29,8 @@ class CitizenFactory extends Factory
             'no_hp' => $this->faker->e164PhoneNumber,
             'birthday' => $this->faker->date,
             'address' => $this->faker->address,
+            'rt' => rand(0, 6),
+            'rw' => rand(0, 6),
             'gender' => $this->faker->randomElement($array = array('L','P')),
         ];
     }

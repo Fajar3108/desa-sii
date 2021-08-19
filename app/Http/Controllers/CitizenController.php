@@ -41,13 +41,15 @@ class CitizenController extends Controller
             'number' => $request->kk
         ]);
 
-        $citizen = $family->citizens()->create([
+        $family->citizens()->create([
             'name' => $request->name,
             'nik' => $request->nik,
             'no_hp' => $request->no_hp,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
-            'address' => $request->address
+            'address' => $request->address,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
         ]);
 
         ALert::success('Success', 'Citizen created successfuly');
@@ -73,7 +75,9 @@ class CitizenController extends Controller
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'address' => $request->address,
-            'family_id' => $request->kk
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'family_id' => $family->id,
         ]);
 
         ALert::success('Success', 'Citizen updated successfuly');
