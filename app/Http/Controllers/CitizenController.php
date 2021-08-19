@@ -11,10 +11,10 @@ class CitizenController extends Controller
 {
     public function index()
     {
-        $citizens = Citizen::latest()->paginate(10);
-
         if (isset(request()->keyword)) {
-            $citizens = Citizen::where('name', 'LIKE', '%' . request()->keyword . '%')->orWhere('nik', request()->keyword)->orWhere('no_hp', request()->keyword)->orWhere('address', 'LIKE', '%' . request()->keyword . '%')->latest()->paginate(10);
+            $citizens = Citizen::where('name', 'LIKE', '%' . request()->keyword . '%')->orWhere('nik', request()->keyword)->orWhere('no_hp', request()->keyword)->orWhere('address', 'LIKE', '%' . request()->keyword . '%')->orWhere('rt', request()->keyword)->orWhere('rw', request()->keyword)->latest()->paginate(10);
+        } else {
+            $citizens = Citizen::latest()->paginate(10);
         }
 
         return view('citizen.index', compact('citizens'));
