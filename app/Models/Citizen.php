@@ -9,7 +9,7 @@ class Citizen extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nik', 'name', 'no_hp', 'birthday', 'gender', 'address', 'rt', 'rw'];
+    protected $fillable = ['nik', 'name', 'no_hp', 'birthday', 'gender', 'address', 'rt', 'rw', 'status'];
 
     public function family()
     {

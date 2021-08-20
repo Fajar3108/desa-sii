@@ -31,7 +31,8 @@ class CitizenFactory extends Factory
             'address' => $this->faker->address,
             'rt' => rand(0, 6),
             'rw' => rand(0, 6),
-            'gender' => $this->faker->randomElement($array = array('L','P')),
+            'status' => $this->faker->randomElement(array('mampu','kurang_mampu')),
+            'gender' => $this->faker->randomElement(array('L','P')),
         ];
     }
 }

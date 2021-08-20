@@ -35,6 +35,7 @@ class CitizenRequest extends FormRequest
             'address' => ['required'],
             'rt' => ['required', 'numeric'],
             'rw' => ['required', 'numeric'],
+            'status' => ['required', 'in:mampu,kurang_mampu']
         ];
     }
 }

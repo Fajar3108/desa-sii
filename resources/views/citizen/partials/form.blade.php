@@ -71,3 +71,10 @@
         @enderror
     </div>
 </div>
+<div class="form-group">
+    <label for="status">Status Ekonomi</label>
+    <select name="status" id="status" class="form-control" required>
+        <option value="mampu" @if($citizen->status == 'mampu') selected @endif>Mampu</option>
+        <option value="kurang_mampu" @if($citizen->status == 'kurang_mampu') selected @endif>Kurang Mampu</option>
+    </select>
+</div>

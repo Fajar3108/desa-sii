@@ -1,6 +1,15 @@
 @extends('layout.master')
 @section('title', 'Penduduk')
 
+@section('custom-style')
+<style>
+.alamat {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+</style>
 
 @section('content')
 
@@ -39,6 +48,7 @@
                                 <th>Alamat</th>
                                 <th>RT/RW</th>
                                 <th>Jenis kelamin</th>
+                                <th>Status Ekonomi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -55,14 +65,15 @@
                                         <span><i class="zmdi"></i>{{ date('d M Y' , strtotime($citizen->birthday)) }}</span>
                                     </td>
                                     <td>
-                                        <span><i class="zmdi"></i>{{ $citizen->address }}</span>
+                                        <p class="alamat"><i class="zmdi"></i>{{ $citizen->address }}</p>
                                     </td>
                                     <td>
                                         <span><i class="zmdi"></i>{{ $citizen->rt }}/{{ $citizen->rw }}</span>
                                     </td>
                                     <td>
-                                        <address><i class="zmdi zmdi-pin"></i>{{ $citizen->gender == 'L' ? 'Laki - laki' : 'Perempuan' }}</address>
+                                        <span><i class="zmdi zmdi-pin"></i>{{ $citizen->gender == 'L' ? 'Laki - laki' : 'Perempuan' }}</span>
                                     </td>
+                                    <td>{{ $citizen->status == 'mampu' ? 'Mampu' : 'Kurang Mampu' }}</td>
                                     <td>
 
                                         <form action="{{ route("citizen.destroy", $citizen->id) }}" method="POST">

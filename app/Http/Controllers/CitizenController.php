@@ -50,6 +50,7 @@ class CitizenController extends Controller
             'address' => $request->address,
             'rt' => $request->rt,
             'rw' => $request->rw,
+            'status' => $request->status,
         ]);
 
         ALert::success('Success', 'Citizen created successfuly');
@@ -77,6 +78,7 @@ class CitizenController extends Controller
             'address' => $request->address,
             'rt' => $request->rt,
             'rw' => $request->rw,
+            'status' => $request->status,
             'family_id' => $family->id,
         ]);
 
