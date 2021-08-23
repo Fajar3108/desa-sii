@@ -46,7 +46,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuSetting">
                                 <li><a class="dropdown-item {{ Request::segment(1) === 'setting' ? 'active text-white' : null }}" href="/setting">General</a></li>
                                 <li><a class="dropdown-item {{ Request::segment(1) === 'slider' ? 'active text-white' : null }}" href="/slider">Slider</a></li>
-                                <li><a class="dropdown-item {{ Request::segment(1) === 'page' ? 'active text-white' : null }}" href="{{ route('page.index') }}">Menu</a></li>
+                                {{-- <li><a class="dropdown-item {{ Request::segment(1) === 'page' ? 'active text-white' : null }}" href="{{ route('page.index') }}">Menu</a></li> --}}
                             </ul>
                         </li>
                         @endif
