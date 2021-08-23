@@ -26,6 +26,7 @@
                         <option value="rt">RT</option>
                         <option value="rw">RW</option>
                         <option value="gender">Jenis Kelamin (L/P)</option>
+                        <option value="status">Status Ekonomi ( Mampu / Kurang Mampu )</option>
                     </select>
                 </div>
                 <div class="input-group">
