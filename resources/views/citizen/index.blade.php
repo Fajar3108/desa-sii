@@ -16,10 +16,23 @@
 <div class="row clearfix">
     <div class="col-12">
         <form action="{{ route('citizen.index') }}">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Cari penduduk disini..." aria-describedby="searchButton" name="keyword">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
+            <div class="d-flex">
+                <div style="width: 150px">
+                    <select name="search_by" id="search_by" class="form-control" aria-describedby="basic-addon1">
+                        <option value="name">Nama</option>
+                        <option value="no_hp">No Telp</option>
+                        <option value="nik">NIK</option>
+                        <option value="address">Alamat</option>
+                        <option value="rt">RT</option>
+                        <option value="rw">RW</option>
+                        <option value="gender">Jenis Kelamin (L/P)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Cari penduduk disini..." aria-describedby="searchButton" name="keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
+                    </div>
                 </div>
             </div>
         </form>
