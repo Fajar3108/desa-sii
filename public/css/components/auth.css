@@ -1,0 +1,25 @@
+body {
+    height: 100vh;
+    background-color: #DCDFFF;
+}
+
+.btn-main {
+    background-color: #4F37E9;
+}
+
+.card-image img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.card-logo {
+    width: 62px;
+    margin-left: -10px;
+    margin-bottom: 30px;
+}
+
+.card-login {
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+}
