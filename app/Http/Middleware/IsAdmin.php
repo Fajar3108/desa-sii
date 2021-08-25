@@ -19,6 +19,6 @@ class IsAdmin
         if (auth()->user()->role->name == 'admin') {
             return $next($request);
         }
-        return redirect()->back();
+        abort('403');
     }
 }
