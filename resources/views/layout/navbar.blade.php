@@ -5,7 +5,7 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/logo.svg') }}" alt="Lucid Logo" class="img-responsive logo"></a>
+            <a href="{{ route('dashboard') }}"><img src="{{ asset('images/logo-cirendeu.png') }}" alt="Lucid Logo" class="img-responsive logo" style="width: 40px"></a>
         </div>
 
         <div class="navbar-right">
@@ -102,7 +102,7 @@
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="icon-menu btn btn-link"><i class="icon-login"></i></button>
+                            <button type="submit" class="btn btn-danger">Logout <i class="icon-login pl-1"></i></button>
                         </form>
                     </li>
                 </ul>
