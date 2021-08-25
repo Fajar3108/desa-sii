@@ -226,32 +226,32 @@
 
         // MASS DELETE BUTTON CLICK HANDLER
         const massDeleteButtonClickHandler = async (event) => {
-        const checkedId = [...getDeleteCheckboxCheckedId()];
-        const confirm   = window.confirm('Are you sure?');
+            const checkedId = [...getDeleteCheckboxCheckedId()];
+            const confirm   = window.confirm('Are you sure?');
 
-        if(!confirm) return;
+            if(!confirm) return;
 
-        try {
-            const endpoint  = `/api/citizens`;
-            const request   = new Request(endpoint, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Allow-Access-Control-Credentials': true,
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ "ids": checkedId })
-            });
-            const response  = await fetch(request);
-            const resJson   = await response.json();
+            try {
+                const endpoint  = `/api/citizens`;
+                const request   = new Request(endpoint, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Allow-Access-Control-Credentials': true,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ "ids": checkedId })
+                });
+                const response  = await fetch(request);
+                const resJson   = await response.json();
 
-            if(response.status !== 200) throw 'Failed';
+                if(response.status !== 200) throw 'Failed';
 
-            checkedId.forEach(id => customSelector.first(`#salary-${id}`).remove());
+                window.location.reload();
 
-        } catch(err) {
-            console.log(err);
-        }
+            } catch(err) {
+                console.log(err);
+            }
         };
 
 

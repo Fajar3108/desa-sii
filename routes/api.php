@@ -38,13 +38,15 @@ Route::get('/village-info', [VillageInfoController::class, 'index']);
 Route::get('/album/{category}', [CategoryController::class, 'show']);
 Route::get('/album', [CategoryController::class, 'index']);
 
+Route::delete('citizens', [CitizenController::class, 'massDestroy']);
+
 Route::middleware(['auth'])->group(function () {
     Route::delete('article', [PostController::class, 'massDestroy']);
     Route::delete('album', [CategoryController::class, 'massDestroy']);
     Route::delete('galleries', [GalleryController::class, 'massDestroy']);
 
     Route::middleware(['admin'])->group(function () {
-        Route::delete('citizens', [CitizenController::class, 'massDestroy']);
+        // Route::delete('citizens', [CitizenController::class, 'massDestroy']);
         Route::delete('users', [UserController::class, 'massDestroy']);
     });
 });
