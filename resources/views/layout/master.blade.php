@@ -256,6 +256,7 @@
         @include('sweetalert::alert')
 
         <!-- Scripts -->
+        @yield('custom-scripts')
         @stack('before-scripts')
 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
@@ -543,5 +544,6 @@
                 tokenSeparators: [',', ' ']
             })
         </script>
+
     </body>
 </html>
