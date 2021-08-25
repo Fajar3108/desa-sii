@@ -16,7 +16,7 @@ class CitizenResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'data' => parent::toArray($request),
+            'data' => $this->all(),
             'timestamp' => now(),
         ];
     }

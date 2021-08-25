@@ -18,7 +18,7 @@ class FamilyResource extends JsonResource
         return [
             'id' => $this->id,
             'no_kk' => $this->number,
-            'members' => new CitizenResource($this->citizens)
+            'members' => collect(new CitizenResource($this->citizens))->only(['data'])->first()
         ];
     }
 }
