@@ -13,6 +13,12 @@
 
 @section('content')
 
+<?php 
+    $search_by_url = request()->search_by ? "&search_by=" . request()->search_by : "";
+    $keyword_url = request()->keyword ? "&keyword=" . request()->keyword : "";
+    $per_page_url = request()->per_page ? "&per_page=" . request()->per_page : "";
+?>
+
 <div class="row clearfix">
     <div class="col-12">
         <form action="{{ route('citizen.index') }}">
@@ -43,11 +49,21 @@
         <div class="card">
             <div class="header">
                 <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h2>Data Penduduk</h2>
+                    <div class="col-6">
+                        <div class="dropdown">
+                            <button class="btn btn-light border border-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ request()->per_page ?? 10 }} Items Per Page
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item @if(request()->per_page == 10) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . "&per_page=" . 10 }}">10</a>
+                                @for ( $i = 25; $i <= 100; $i += 25 )
+                                <a class="dropdown-item @if(request()->per_page == $i) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . "&per_page=" . $i }}">{{$i}}</a>
+                                @endfor
+                            </div>
+                        </div>
                     </div>
                     <div class="col-6 text-right d-flex justify-content-end">
-                        <button type="submit" class="btn btn-danger btn-sm disabled" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete">Delete All Selected</button>
+                        <button type="submit" class="btn btn-danger btn-sm disabled mr-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete"><i class="icon-trash"></i></button>
                         <a href="{{ route("citizen.create") }}" class="btn btn-primary btn-sm">Tambah</a>
                     </div>
                 </div>
@@ -123,7 +139,7 @@
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="{{ $citizens->previousPageUrl() }}">Previous</a></li>
                             @for ($i = $citizens->currentPage() == 1 ? $citizens->currentPage() : $citizens->currentPage() - 1; $i <= ($citizens->currentPage() + 3 >= $citizens->lastPage() ? $citizens->lastPage() : $citizens->currentPage() + 3); $i++)
-                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . "&search_by=" . request()->search_by . "&keyword=" . request()->keyword }}">{{ $i }}</a></li>
+                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . $search_by_url . $keyword_url . $per_page_url }}">{{ $i }}</a></li>
                             @endfor
                             <li class="page-item"><a class="page-link" href="{{ $citizens->nextPageUrl() }}">Next</a></li>
                         </ul>

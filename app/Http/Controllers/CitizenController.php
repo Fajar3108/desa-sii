@@ -16,12 +16,12 @@ class CitizenController extends Controller
             $search_by = request()->search_by;
 
             if ($search_by == 'rt' || $search_by == 'rw' || $search_by == 'gender' || $search_by == 'status') {
-                $citizens = Citizen::where($search_by, $keyword)->latest()->paginate($request->per_page ?? 10);
+                $citizens = Citizen::where($search_by, $keyword)->latest()->paginate(request()->per_page ?? 10);
             } else {
-                $citizens = Citizen::where($search_by, 'LIKE', '%' . $keyword . '%')->latest()->paginate($request->per_page ?? 10);
+                $citizens = Citizen::where($search_by, 'LIKE', '%' . $keyword . '%')->latest()->paginate(request()->per_page ?? 10);
             }
         } else {
-            $citizens = Citizen::latest()->paginate($request->per_page ?? 10);
+            $citizens = Citizen::latest()->paginate(request()->per_page ?? 10);
         }
 
         return view('citizen.index', compact('citizens'));
