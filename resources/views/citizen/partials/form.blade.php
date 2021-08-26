@@ -57,15 +57,27 @@
 </div>
 <div class="form-group row">
     <div class="col-6">
-        <label>RT</label>
-        <input type="number" value="{{ old('rt') ?? $citizen->rt }}" name="rt" class="form-control" required>
+        <label for="rt">RT</label>
+        <select name="rt" id="rt" class="form-control" required>
+            @for ($i = 1; $i <= 10; $i++)
+            <option value="{{ '00' . $i }}" @if($citizen->rt == "00" . $i) selected @endif>
+                {{ $i < 10 ? "00" . $i : "0" . $i }}
+            </option>
+            @endfor
+        </select>
         @error('rt')
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
     <div class="col-6">
         <label>RW</label>
-        <input type="number" value="{{ old('rw') ?? $citizen->rw }}" name="rw" class="form-control" required>
+        <select name="rw" id="rw" class="form-control" required>
+            @for ($i = 1; $i <= 5; $i++)
+            <option value="{{ '00' . $i }}" @if($citizen->rw == "00" . $i) selected @endif>
+                {{ $i < 10 ? "00" . $i : "0" . $i }}
+            </option>
+            @endfor
+        </select>
         @error('rw')
             <small class="text-danger">{{ $message }}</small>
         @enderror
@@ -78,3 +90,4 @@
         <option value="kurang_mampu" @if($citizen->status == 'kurang_mampu') selected @endif>Kurang Mampu</option>
     </select>
 </div>
+

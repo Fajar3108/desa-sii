@@ -33,8 +33,8 @@ class CitizenRequest extends FormRequest
             'birthday' => ['required', 'date'],
             'gender' => ['required', 'in:L,P'],
             'address' => ['required'],
-            'rt' => ['required', 'numeric'],
-            'rw' => ['required', 'numeric'],
+            'rt' => ['required'],
+            'rw' => ['required'],
             'status' => ['required', 'in:mampu,kurang_mampu']
         ];
     }
