@@ -15,10 +15,14 @@
 </head>
 <body class="d-flex align-items-center justify-content-center">
 
+<div class="big-background">
+    <img src="{{ asset('images/logo-cirendeu.png') }}" alt="Logo">
+</div>
+
 <div class="card card-login" style="max-width: 800px;">
   <div class="row">
     <div class="col-md-6">
-      <div class="card-body pl-5">
+      <div class="card-body pl-md-5 pl-4">
         <img src="{{ asset('images/logo-cirendeu.png') }}" class="card-logo mt-4" alt="Logo">
         <h1 class="card-title h1">Login</h1>
         <p class="card-text text-muted">Welcome back to Cirendeu Admin Panel</p>
@@ -43,7 +47,7 @@
         </form>
       </div>
     </div>
-    <div class="col-md-6 card-image">
+    <div class="col-md-6 card-image d-none d-md-block">
       <img src="https://raw.githubusercontent.com/darektoa/village-website/main/src/assets/images/profile/slide_3.jpeg" class="img-fluid rounded-start" alt="">
     </div>
   </div>
