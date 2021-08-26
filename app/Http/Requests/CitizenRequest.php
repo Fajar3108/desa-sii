@@ -28,7 +28,7 @@ class CitizenRequest extends FormRequest
         return [
             'name' => ['required'],
             'nik' => ['required', 'digits:16', Rule::unique('citizens')->ignore($this->citizen)],
-            'no_hp' => [Rule::unique('citizens')->ignore($this->citizen)],
+            'no_hp' => ['required'],
             'kk' => ['required', 'digits:16'],
             'birthday' => ['required', 'date'],
             'gender' => ['required', 'in:L,P'],

@@ -18,7 +18,7 @@ class CreateCitizensTable extends Migration
             $table->foreignId("family_id")->constrained();
             $table->string("nik")->unique();
             $table->string("name");
-            $table->string("no_hp")->unique()->nullable();
+            $table->string("no_hp")->nullable();
             $table->date("birthday");
             $table->text("address");
             $table->enum('gender', ["L", "P"]);
