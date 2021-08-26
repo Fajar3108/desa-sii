@@ -119,7 +119,15 @@
                     </table>
                 </div>
                 <div class="mt-3">
-                    {{ $citizens->links() }}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="{{ $citizens->previousPageUrl() }}">Previous</a></li>
+                            @for ($i = $citizens->currentPage() == 1 ? $citizens->currentPage() : $citizens->currentPage() - 1; $i <= ($citizens->currentPage() + 3 >= $citizens->lastPage() ? $citizens->lastPage() : $citizens->currentPage() + 3); $i++)
+                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . "&search_by=" . request()->search_by . "&keyword=" . request()->keyword }}">{{ $i }}</a></li>
+                            @endfor
+                            <li class="page-item"><a class="page-link" href="{{ $citizens->nextPageUrl() }}">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
