@@ -13,7 +13,7 @@
 
 @section('content')
 
-<?php 
+<?php
     $search_by_url = request()->search_by ? "&search_by=" . request()->search_by : "";
     $keyword_url = request()->keyword ? "&keyword=" . request()->keyword : "";
     $per_page_url = request()->per_page ? "&per_page=" . request()->per_page : "";
@@ -100,7 +100,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        {{ $citizen->name }}
+                                        <a href="{{ route('citizen.show', $citizen->id) }}">{{ $citizen->name }}</a>
                                     </td>
                                     <td>
                                         {{ $citizen->no_hp }}
