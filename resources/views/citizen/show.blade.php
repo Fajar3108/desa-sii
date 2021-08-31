@@ -27,7 +27,7 @@
                         </thead>
                             <tbody>
                                 @foreach ($citizens as $citizen)
-                                <tr>
+                                <tr @if($citizen->id === request()->citizen->id) class="bg-primary text-white" @endif>
                                     <td>
                                         {{ $citizen->name }}
                                     </td>
