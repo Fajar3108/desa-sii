@@ -11,7 +11,7 @@
         <div class="card">
             <div class="header">
                 <h2 style="margin-bottom: 10px !important">Keluarga <span class="text-primary">{{ $citizen->name }}</span></h2>
-                <p class="mb-0">No KK : {{ $citizen->family->number }}</p>
+                <p class="mb-0">No KK : <strong>{{ $citizen->family->number }}</strong></p>
                 <p class="mb-0">Jumlah anggota kelarga : {{ $citizens->count() }}</p>
             </div>
             <div class="body">
@@ -27,7 +27,7 @@
                         </thead>
                             <tbody>
                                 @foreach ($citizens as $citizen)
-                                <tr @if($citizen->id === request()->citizen->id) class="bg-primary text-white" @endif>
+                                <tr @if($citizen->id === request()->citizen->id) style="background-color: #cee5ff" @endif>
                                     <td>
                                         {{ $citizen->name }}
                                     </td>
