@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title', 'Tambah Penduduk')
 @section('parentPageTitle', 'Penduduk')
+@section('back-navigation', route('citizen.index'))
 
 
 @section('content')

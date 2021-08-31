@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', 'Detail Artikel')
 @section('parentPageTitle', 'Artikel')
-
+@section('back-navigation', route('post.index'))
 
 @section('content')
 <div class="row clearfix">

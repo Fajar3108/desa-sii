@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', 'Keluarga')
 @section('parentPageTitle', 'Penduduk')
-
+@section('back-navigation', route('citizen.index'))
 
 @section('content')
 
@@ -10,7 +10,6 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <p><a href="{{ route('citizen.index') }}">< Kembali</a></p>
                 <h2 style="margin-bottom: 10px !important">Keluarga <span class="text-primary">{{ $citizen->name }}</span></h2>
                 <p class="mb-0">No KK : {{ $citizen->family->number }}</p>
                 <p class="mb-0">Jumlah anggota kelarga : {{ $citizens->count() }}</p>

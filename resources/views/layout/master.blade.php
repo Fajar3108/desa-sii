@@ -14,7 +14,7 @@
 
         {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
         @stack('before-styles')
-
+s
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.css') }}"/>
@@ -236,7 +236,7 @@
                                 <ul class="breadcrumb">
                                     {{-- <li class="breadcrumb-item"><a href="{{route('dashboard.analytical')}}"><i class="icon-home"></i></a></li> --}}
                                     @if (trim($__env->yieldContent('parentPageTitle')))
-                                       <li class="breadcrumb-item">@yield('parentPageTitle')</li>
+                                       <li class="breadcrumb-item"><a href="@yield('back-navigation')">@yield('parentPageTitle')</a></li>
                                     @endif
                                     @if (trim($__env->yieldContent('title')))
                                         <li class="breadcrumb-item active">@yield('title')</li>

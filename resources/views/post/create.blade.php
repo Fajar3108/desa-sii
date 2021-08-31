@@ -1,6 +1,7 @@
 @extends("layout.master")
 @section('title', 'Tambah Artikel')
 @section('parentPageTitle', 'Artikel')
+@section('back-navigation', route('post.index'))
 
 @section('content')
 

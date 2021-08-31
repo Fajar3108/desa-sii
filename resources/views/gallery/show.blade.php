@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title', "Gallery")
 @section('parentPageTitle', 'Album')
+@section('back-navigation', route('category.index'))
 
 
 @section('content')
