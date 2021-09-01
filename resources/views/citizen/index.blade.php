@@ -25,10 +25,10 @@
             <div class="d-flex">
                 <div style="width: 150px">
                     <select name="search_by" id="search_by" class="form-control" aria-describedby="basic-addon1">
-                        <option value="name">Nama</option>
-                        <option value="no_hp">No Telp</option>
-                        <option value="nik">NIK</option>
-                        <option value="address">Alamat</option>
+                        <option value="name" @if(request()->search_by == "name") selected @endif>Nama</option>
+                        <option value="no_hp" @if(request()->search_by == "no_hp") selected @endif>No Telp</option>
+                        <option value="nik" @if(request()->search_by == "nik") selected @endif>NIK</option>
+                        <option value="address" @if(request()->search_by == "address") selected @endif>Alamat</option>
                         <option value="rt">RT</option>
                         <option value="rw">RW</option>
                         <option value="gender">Jenis Kelamin (L/P)</option>
