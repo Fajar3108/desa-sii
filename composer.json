@@ -13,6 +13,7 @@
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^4.0"
     },
     "require-dev": {

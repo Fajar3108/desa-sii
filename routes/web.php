@@ -34,6 +34,8 @@ Route::any('/register', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function() { return view('dashboard.dashboard'); })->name('dashboard');
 
+    Route::get('citizen/export', [CitizenController::class, 'export'])->name('citizen.export');
+
     Route::resource('/citizen', CitizenController::class);
 
     Route::resource('/post', PostController::class);
@@ -59,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/setting/{id}', [VillageInfoController::class, 'update'])->name('setting.update');
 
         Route::resource('/citizen', CitizenController::class);
+
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/profile', [UserController::class, 'show'])->name('users.show');

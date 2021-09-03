@@ -65,6 +65,10 @@
                     <div class="col-6 text-right d-flex justify-content-end">
                         <button type="submit" class="btn btn-danger btn-sm disabled mr-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete"><i class="icon-trash"></i></button>
                         <a href="{{ route("citizen.create") }}" class="btn btn-primary btn-sm">Tambah</a>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button class="btn btn-outline-success btn-sm ml-1">Import</button>
+                            <a href="{{ route('citizen.export') }}" class="btn btn-outline-success btn-sm" target="_blank">Export</a>
+                        </div>
                     </div>
                 </div>
             </div>
