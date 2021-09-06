@@ -21,7 +21,7 @@ class CitizensImport implements ToModel, WithHeadingRow
             'nik' => $row['nik'],
             'family_id' => Family::firstOrCreate([
                 'number' => $row['no_kk'],
-            ]),
+            ])->id,
             'birthday' => $row['tanggal_lahir'],
             'gender' => $row['jenis_kelamin'],
             'address' => $row['alamat'],

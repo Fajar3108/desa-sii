@@ -66,7 +66,8 @@
                         <button type="submit" class="btn btn-danger btn-sm disabled mr-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete"><i class="icon-trash"></i></button>
                         <a href="{{ route("citizen.create") }}" class="btn btn-primary btn-sm">Tambah</a>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-outline-success btn-sm ml-1">Import</button>
+                            <button type="button" class="btn btn-outline-success btn-sm ml-1"  data-toggle="modal" data-target="#importModal">Import</button>
+
                             <a href="{{ route('citizen.export') }}" class="btn btn-outline-success btn-sm" target="_blank">Export</a>
                         </div>
                     </div>
@@ -152,7 +153,31 @@
             </div>
         </div>
     </div>
+</div>
 
+<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importModalLabel">Import Data Penduduk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('citizen.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <input type="file" class="form-control" name="file">
+                @error('file')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <button class="btn btn-success btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 @stop

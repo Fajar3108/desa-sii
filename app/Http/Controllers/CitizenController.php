@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CitizenRequest;
 use App\Models\{Citizen, Family};
 use App\Exports\CitizensExport;
+use App\Imports\CitizensImport;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use App\Helpers\ImageHandler;
 
 class CitizenController extends Controller
 {
@@ -113,16 +116,12 @@ class CitizenController extends Controller
     public function import(Request $request)
     {
         $this->validate($request, [
-			'file' => 'required|mimes:csv,xls,xlsx'
+			'file' => ['required', 'mimes:csv,xls,xlsx']
 		]);
 
-        $file = $request->file('file');
+        $file = ImageHandler::store($request->file('file'), 'citizen_files');
 
-        $file_name = rand().$file->getClientOriginalName();
-
-        $file->move('citizen_file', $file_name);
-
-        Excel::import(new CitizensImport, public_path('/citizen_file/'.$file_name));
+        Excel::import(new CitizensImport, public_path('storage/' . $file));
 
         Alert::success('Success', 'Import citizens successfully');
 

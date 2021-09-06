@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function() { return view('dashboard.dashboard'); })->name('dashboard');
 
     Route::get('citizen/export', [CitizenController::class, 'export'])->name('citizen.export');
+    Route::post('citizen/import', [CitizenController::class, 'import'])->name('citizen.import');
 
     Route::resource('/citizen', CitizenController::class);
 
