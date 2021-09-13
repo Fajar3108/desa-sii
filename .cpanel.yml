@@ -1,4 +1,4 @@
 deployment:
   task:
-    - export DEPLOY_PATH = '/home/solh8599/public_html/laravel-app/cireundeu-admin'
+    - export DEPLOY_PATH=/home/solh8599/public_html/laravel-app/cireundeu-admin
     - /bin/cp -r * $DEPLOY_PATH
