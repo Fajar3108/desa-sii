@@ -23,8 +23,9 @@
 <div class="row clearfix">
     <div class="col-12 collapse" id="collapseFilter">
         <div class="card m-0 mb-2">
-            <div class="header mb-0 pb-0">
+            <div class="header mb-0 pb-0 d-flex justify-content-between">
                 <h4 class="m-0">Filter Penduduk</h4>
+                <button class="btn btn-danger btn-sm" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" ><i class="fa fa-close"></i></button>
             </div>
             <div class="body">
                 <div class="table-responsive">
