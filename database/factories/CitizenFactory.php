@@ -25,7 +25,7 @@ class CitizenFactory extends Factory
         return [
             'gender' => ($gender = $this->faker->randomElement(array('L','P'))),
             'family_id' => Family::firstOrCreate(['number' => $kk[rand(0, count($kk) - 1)]])->id,
-            'nik' => $this->faker->unique()->numberBetween(1111111111111111, 9999999999999999),
+            'nik' => $this->faker->unique()->numerify("################"),
             'name' => $this->faker->name($gender == "L" ? 'male' : 'female'),
             'no_hp' => $this->faker->e164PhoneNumber,
             'birthday' => $this->faker->date,

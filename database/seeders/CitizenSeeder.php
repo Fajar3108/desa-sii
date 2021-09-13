@@ -14,6 +14,6 @@ class CitizenSeeder extends Seeder
      */
     public function run()
     {
-        Citizen::factory(50)->create();
+        Citizen::factory(100)->create();
     }
 }
