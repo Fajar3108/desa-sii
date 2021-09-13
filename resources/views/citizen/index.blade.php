@@ -17,6 +17,7 @@
     $keyword_url = request()->keyword ? "&keyword=" . request()->keyword : "";
     $per_page_url = request()->per_page ? "&per_page=" . request()->per_page : "";
     $order_url = request()->order_by && request()->order_type ? "&order_by=" . request()->order_by . "&order_type=" . request()->order_type : "";
+    $filter_url = "&gender=" . (request()->gender ?? "all") . "&status=" . (request()->status ?? "all") . "&rt=" . (request()->rt ?? "all") . "&rw=" . (request()->rw ?? "all");
 ?>
 
 <div class="row clearfix">
@@ -118,17 +119,17 @@
                                 <i class="fa fa-sort"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item @if((request()->order_by == "updated_at" && request()->order_type == "DESC") || (!isset(request()->order_by) && !isset(request()->order_type)))) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=DESC" }}">Terakhir diperbarui</a>
+                                <a class="dropdown-item @if((request()->order_by == "updated_at" && request()->order_type == "DESC") || (!isset(request()->order_by) && !isset(request()->order_type)))) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . $filter_url . "&order_by=updated_at&order_type=DESC" }}">Terakhir diperbarui</a>
 
-                                <a class="dropdown-item @if(request()->order_by == "updated_at" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=ASC" }}">Terlama</a>
+                                <a class="dropdown-item @if(request()->order_by == "updated_at" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . $filter_url . "&order_by=updated_at&order_type=ASC" }}">Terlama</a>
 
                                 <a class="dropdown-item @if(request()->order_by == "name" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=name&order_type=ASC" }}">Nama ( A - Z )</a>
 
-                                <a class="dropdown-item @if(request()->order_by == "name" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=name&order_type=DESC" }}">Nama ( Z - A )</a>
+                                <a class="dropdown-item @if(request()->order_by == "name" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . $filter_url . "&order_by=name&order_type=DESC" }}">Nama ( Z - A )</a>
 
-                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=birthday&order_type=DESC" }}">Usia Termuda</a>
+                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . $filter_url . "&order_by=birthday&order_type=DESC" }}">Usia Termuda</a>
 
-                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=birthday&order_type=ASC" }}">Usia Tertua</a>
+                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . $filter_url . "&order_by=birthday&order_type=ASC" }}">Usia Tertua</a>
                             </div>
                         </span>
 
@@ -163,9 +164,9 @@
                                     <i class="fa fa-table mr-1"></i> {{ request()->per_page ?? 10 }}
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item @if(request()->per_page == 10) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . "&per_page=" . 10 }}">10 Items per Page</a>
+                                    <a class="dropdown-item @if(request()->per_page == 10) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . $filter_url . "&per_page=" . 10 }}">10 Items per Page</a>
                                     @for ( $i = 25; $i <= 100; $i += 25 )
-                                    <a class="dropdown-item @if(request()->per_page == $i) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . "&per_page=" . $i }}">{{$i}} Items per Page</a>
+                                    <a class="dropdown-item @if(request()->per_page == $i) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . $filter_url . "&per_page=" . $i }}">{{$i}} Items per Page</a>
                                     @endfor
                                 </div>
                             </div>
@@ -243,18 +244,18 @@
                 <div class="mt-3 d-flex align-items-center justify-content-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item @if(!isset(request()->page) || request()->page == 1) disabled @endif"><a class="page-link" href="{{ $citizens->previousPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url }}">| <i class="fa fa-arrow-left"></i></a></li>
+                            <li class="page-item @if(!isset(request()->page) || request()->page == 1) disabled @endif"><a class="page-link" href="{{ $citizens->previousPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url . $filter_url }}">| <i class="fa fa-arrow-left"></i></a></li>
 
                             @for ($i = $citizens->currentPage() <= 2 ? 1 : $citizens->currentPage() - 2; $i <= ($citizens->currentPage() + 3 >= $citizens->lastPage() ? $citizens->lastPage() : $citizens->currentPage() + 3); $i++)
-                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . $search_by_url . $keyword_url . $per_page_url . $order_url }}">{{ $i }}</a></li>
+                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . $search_by_url . $keyword_url . $per_page_url . $order_url . $filter_url }}">{{ $i }}</a></li>
                             @endfor
 
                             @if ($citizens->currentPage() + 3 < $citizens->lastPage())
                             <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
-                            <li class="page-item"><a class="page-link" href="{{ $citizens->url($citizens->lastPage()) . $search_by_url . $keyword_url . $per_page_url . $order_url }}">{{ $citizens->lastPage() }}</a></li>
+                            <li class="page-item"><a class="page-link" href="{{ $citizens->url($citizens->lastPage()) . $search_by_url . $keyword_url . $per_page_url . $order_url . $filter_url }}">{{ $citizens->lastPage() }}</a></li>
                             @endif
 
-                            <li class="page-item @if(request()->page == $citizens->lastPage()) disabled @endif"><a class="page-link" href="{{ $citizens->nextPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url }}"><i class="fa fa-arrow-right"></i> |</a></li>
+                            <li class="page-item @if(request()->page == $citizens->lastPage()) disabled @endif"><a class="page-link" href="{{ $citizens->nextPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url . $filter_url }}"><i class="fa fa-arrow-right"></i> |</a></li>
                         </ul>
                     </nav>
                 </div>
