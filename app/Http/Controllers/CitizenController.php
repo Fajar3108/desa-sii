@@ -16,18 +16,25 @@ class CitizenController extends Controller
 {
     public function index()
     {
+        $order_by = request()->order_by == "name" || request()->order_by == "birthday" ? request()->order_by : "updated_at";
+        $order_type = request()->order_type == "ASC" ? "ASC" : "DESC";
+
+        $per_page = request()->per_page ?? 10;
+
         if (isset(request()->keyword) && isset(request()->search_by)) {
             $keyword = request()->keyword;
             $search_by = request()->search_by;
 
             if ($search_by == 'rt' || $search_by == 'rw' || $search_by == 'gender' || $search_by == 'status') {
-                $citizens = Citizen::where($search_by, $keyword)->latest()->paginate(request()->per_page ?? 10);
+                $citizens = Citizen::where($search_by, $keyword)->orderBy($order_by, $order_type)->latest();
             } else {
-                $citizens = Citizen::where($search_by, 'LIKE', '%' . $keyword . '%')->latest()->paginate(request()->per_page ?? 10);
+                $citizens = Citizen::where($search_by, 'LIKE', '%' . $keyword . '%')->orderBy($order_by, $order_type)->latest();
             }
         } else {
-            $citizens = Citizen::latest()->paginate(request()->per_page ?? 10);
+            $citizens = Citizen::orderBy($order_by, $order_type);
         }
+
+        $citizens = $citizens->paginate($per_page);
 
         return view('citizen.index', compact('citizens'));
     }

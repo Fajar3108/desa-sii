@@ -3,82 +3,106 @@
 
 @section('custom-style')
 <style>
-.alamat {
+.text-limitter {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 500px;
+    max-width: 200px;
 }
 </style>
-
 @section('content')
 
 <?php
     $search_by_url = request()->search_by ? "&search_by=" . request()->search_by : "";
     $keyword_url = request()->keyword ? "&keyword=" . request()->keyword : "";
     $per_page_url = request()->per_page ? "&per_page=" . request()->per_page : "";
+    $order_url = request()->order_by && request()->order_type ? "&order_by=" . request()->order_by . "&order_type=" . request()->order_type : "";
 ?>
 
 <div class="row clearfix">
-    <div class="col-12">
-        <form action="{{ route('citizen.index') }}">
-            <div class="d-flex">
-                <div style="width: 150px">
-                    <select name="search_by" id="search_by" class="form-control" aria-describedby="basic-addon1">
-                        <option value="name" @if(request()->search_by == "name") selected @endif>Nama</option>
-                        <option value="no_hp" @if(request()->search_by == "no_hp") selected @endif>No Telp</option>
-                        <option value="nik" @if(request()->search_by == "nik") selected @endif>NIK</option>
-                        <option value="address" @if(request()->search_by == "address") selected @endif>Alamat</option>
-                        <option value="rt">RT</option>
-                        <option value="rw">RW</option>
-                        <option value="gender">Jenis Kelamin (L/P)</option>
-                        <option value="status">Status Ekonomi ( Mampu / Kurang Mampu )</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari penduduk disini..." aria-describedby="searchButton" name="keyword">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
-                    </div>
-                </div>
+    <div class="col-12 collapse" id="collapseFilter">
+        <div class="card m-0 mb-2">
+            <div class="body">
+                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="col-lg-12">
         <div class="card">
-            <div class="header">
+            <div class="header pb-2">
                 <div class="row">
                     <div class="col-6">
-                        <div class="dropdown">
-                            <button class="btn btn-light border border-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ request()->per_page ?? 10 }} Items Per Page
+                        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Filter">
+                            <i class="fa fa-filter"></i>
+                        </button>
+                        <span>
+                            <button type="button" class="btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-sort"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item @if(request()->per_page == 10) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . "&per_page=" . 10 }}">10</a>
-                                @for ( $i = 25; $i <= 100; $i += 25 )
-                                <a class="dropdown-item @if(request()->per_page == $i) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . "&per_page=" . $i }}">{{$i}}</a>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 text-right d-flex justify-content-end">
-                        <button type="submit" class="btn btn-danger btn-sm disabled mr-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete"><i class="icon-trash"></i></button>
-                        <a href="{{ route("citizen.create") }}" class="btn btn-primary btn-sm">Tambah</a>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-success btn-sm ml-1"  data-toggle="modal" data-target="#importModal">Import</button>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item @if((request()->order_by == "updated_at" && request()->order_type == "DESC") || (!isset($order_by) && !isset($order_by))) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=DESC" }}">Terakhir diperbarui</a>
 
-                            <a href="{{ route('citizen.export') }}" class="btn btn-outline-success btn-sm" target="_blank">Export</a>
+                                <a class="dropdown-item @if(request()->order_by == "updated_at" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=ASC" }}">Terlama</a>
+
+                                <a class="dropdown-item @if(request()->order_by == "name" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=name&order_type=ASC" }}">Nama ( A - Z )</a>
+
+                                <a class="dropdown-item @if(request()->order_by == "name" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=name&order_type=DESC" }}">Nama ( Z - A )</a>
+
+                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "DESC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=birthday&order_type=DESC" }}">Usia Termuda</a>
+
+                                <a class="dropdown-item @if(request()->order_by == "birthday" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=birthday&order_type=ASC" }}">Usia Tertua</a>
+                            </div>
+                        </span>
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#importModal" title="Import"><i class="fa fa-upload"></i></button>
+
+                            <a href="{{ route('citizen.export') }}" class="btn btn-outline-success" target="_blank" title="Export"><i class="fa fa-download"></i></a>
                         </div>
+
+                        <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete" disabled><i class="icon-trash"></i></button>
+
+                        <a href="{{ route("citizen.create") }}" class="btn btn-primary" title="Tambah Penduduk"><i class="fa fa-plus"></i></a>
+                    </div>
+                    <div class="col-6">
+                        <form action="{{ route('citizen.index') }}" class="d-flex">
+                            <div style="width: 150px" class="input-group input-group-sm">
+                                <select name="search_by" id="search_by" class="form-control form-control-sm" aria-describedby="basic-addon1">
+                                    <option value="name" @if(request()->search_by == "name") selected @endif>Nama</option>
+                                    <option value="no_hp" @if(request()->search_by == "no_hp") selected @endif>No Telp</option>
+                                    <option value="nik" @if(request()->search_by == "nik") selected @endif>NIK</option>
+                                    <option value="address" @if(request()->search_by == "address") selected @endif>Alamat</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm mr-1">
+                                <input type="text" class="form-control" placeholder="Cari..." aria-describedby="searchButton" name="keyword">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="submit" id="searchButton"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="btn-group mr-1">
+                                <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-table mr-1"></i> {{ request()->per_page ?? 10 }}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item @if(request()->per_page == 10) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . "&per_page=" . 10 }}">10 Items per Page</a>
+                                    @for ( $i = 25; $i <= 100; $i += 25 )
+                                    <a class="dropdown-item @if(request()->per_page == $i) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $order_url . "&per_page=" . $i }}">{{$i}} Items per Page</a>
+                                    @endfor
+                                </div>
+                            </div>
+                            <a href="{{ route('citizen.index') }}" class="btn btn-sm border-success d-flex align-items-center" title="Refresh - Reset All Filter"><i class="fa fa-retweet text-success"></i></a>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="body">
+            <div class="body pt-0">
                 <div class="table-responsive">
-                    <table class="table table-hover m-b-0 c_list">
+                    <table class="table table-bordered table-hover m-b-0 c_list">
                         <thead>
                             <tr>
-                                <th class="align-middle">
+                                <th class="align-middle text-center">
                                     <div class="form-check">
                                         <input type="checkbox" id="selectAll" class="form-check-input position-static">
                                     </div>
@@ -86,9 +110,10 @@
                                 <th class="align-middle">Nama</th>
                                 <th class="align-middle">No Telp</th>
                                 <th class="align-middle">Tanggal lahir</th>
-                                <th class="align-middle">Alamat</th>
-                                <th class="align-middle">RT/RW</th>
-                                <th class="align-middle">Jenis kelamin</th>
+                                <th class="align-middle text-center">
+                                    <i class="fa fa-male text-primary"></i>
+                                    <i class="fa fa-female text-danger"></i>
+                                </th>
                                 <th class="align-middle">Status Ekonomi</th>
                                 <th class="align-middle">Action</th>
                             </tr>
@@ -99,13 +124,14 @@
                                 @endif
                                 @foreach ($citizens as $citizen)
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
+                                        <i class="zmdi"></i>
                                         <div class="form-check">
                                             <input data-id="{{ $citizen->id }}"  type="checkbox" name="ids[]" class="form-check-input check-id position-static">
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="{{ route('citizen.show', $citizen->id) }}">{{ $citizen->name }}</a>
+                                        <p class="text-limitter m-0"><a href="{{ route('citizen.show', $citizen->id) }}" class="text-success">{{ $citizen->name }}</a></p>
                                     </td>
                                     <td>
                                         {{ $citizen->no_hp }}
@@ -113,40 +139,45 @@
                                     <td>
                                         <span><i class="zmdi"></i>{{ date('d M Y' , strtotime($citizen->birthday)) }}</span>
                                     </td>
-                                    <td>
-                                        <p class="alamat"><i class="zmdi"></i>{{ $citizen->address }}</p>
-                                    </td>
-                                    <td>
-                                        <span><i class="zmdi"></i>{{ $citizen->rt }}/{{ $citizen->rw }}</span>
-                                    </td>
-                                    <td>
-                                        <span><i class="zmdi zmdi-pin"></i>{{ $citizen->gender == 'L' ? 'Laki - laki' : 'Perempuan' }}</span>
+                                    <td class="text-center">
+                                        <span>
+                                            <i class="zmdi zmdi-pin"></i>
+                                            @if ($citizen->gender == 'L')
+                                            <div>
+                                                <h5><i class="fa fa-male text-primary" title="Laki-laki"></i></h5>
+                                            </div>
+                                            @else
+                                            <div>
+                                                <h5><i class="fa fa-female text-danger" title="Perempuan"></i></h5>
+                                            </div>
+                                            @endif
+                                        </span>
                                     </td>
                                     <td>{{ $citizen->status == 'mampu' ? 'Mampu' : 'Kurang Mampu' }}</td>
                                     <td>
-
-                                        <form action="{{ route("citizen.destroy", $citizen->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <a href="{{ route('citizen.show', $citizen->id) }}" class="btn btn-success" title="Show"><i class="fa fa-eye"></i></a>
-                                            <a href="{{ route('citizen.edit', $citizen->id) }}" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>
-
-                                            <button type="submit" class="btn btn-danger" title="Delete"><i class="fa fa-trash-o"></i></button>
-                                        </form>
+                                        <a href="{{ route('citizen.show', $citizen->id) }}" class="btn btn-info" title="Show"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('citizen.edit', $citizen->id) }}" class="btn btn-success" title="Edit"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3 d-flex align-items-center justify-content-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="{{ $citizens->previousPageUrl() }}">Previous</a></li>
-                            @for ($i = $citizens->currentPage() == 1 ? $citizens->currentPage() : $citizens->currentPage() - 1; $i <= ($citizens->currentPage() + 3 >= $citizens->lastPage() ? $citizens->lastPage() : $citizens->currentPage() + 3); $i++)
-                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . $search_by_url . $keyword_url . $per_page_url }}">{{ $i }}</a></li>
+                            <li class="page-item @if(!isset(request()->page) || request()->page == 1) disabled @endif"><a class="page-link" href="{{ $citizens->previousPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url }}">| <i class="fa fa-arrow-left"></i></a></li>
+
+                            @for ($i = $citizens->currentPage() <= 2 ? 1 : $citizens->currentPage() - 2; $i <= ($citizens->currentPage() + 3 >= $citizens->lastPage() ? $citizens->lastPage() : $citizens->currentPage() + 3); $i++)
+                            <li class="page-item @if($citizens->currentPage() == $i) active @endif"><a class="page-link" href="{{ $citizens->url($i) . $search_by_url . $keyword_url . $per_page_url . $order_url }}">{{ $i }}</a></li>
                             @endfor
-                            <li class="page-item"><a class="page-link" href="{{ $citizens->nextPageUrl() }}">Next</a></li>
+
+                            @if ($citizens->currentPage() + 3 < $citizens->lastPage())
+                            <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+                            <li class="page-item"><a class="page-link" href="{{ $citizens->url($citizens->lastPage()) . $search_by_url . $keyword_url . $per_page_url . $order_url }}">{{ $citizens->lastPage() }}</a></li>
+                            @endif
+
+                            <li class="page-item @if(request()->page == $citizens->lastPage()) disabled @endif"><a class="page-link" href="{{ $citizens->nextPageUrl() . $search_by_url . $keyword_url . $per_page_url . $order_url }}"><i class="fa fa-arrow-right"></i> |</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -251,15 +282,14 @@
         // ACTIVE MASS DELETE BUTTON
         const activateDeleteButton = () => {
             const deleteButton  = getButtonElmnts().get('massDelete');
-            deleteButton.classList.remove('disabled');
+            deleteButton.disabled = false;
         }
 
 
         // DISABLE MASS DELETE BUTTON
         const disableDeleteButton = () => {
             const deleteButton  = getButtonElmnts().get('massDelete');
-            deleteButton.classList.remove('disabled');
-            deleteButton.classList.add('disabled');
+            deleteButton.disabled = true;
         }
 
 
