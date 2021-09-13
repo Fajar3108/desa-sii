@@ -22,8 +22,85 @@
 <div class="row clearfix">
     <div class="col-12 collapse" id="collapseFilter">
         <div class="card m-0 mb-2">
+            <div class="header mb-0 pb-0">
+                <h4 class="m-0">Filter Penduduk</h4>
+            </div>
             <div class="body">
-                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Jenis Kelamin</th>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-success @if(!request()->gender || request()->gender == "all") active @endif">
+                                        <input type="radio" name="gender" id="all" value="all" @if(!request()->gender || request()->gender == "all") checked @endif>
+                                        <i class="fa fa-male"></i>
+                                        <i class="fa fa-female mr-1"></i> Semua
+                                    </label>
+                                    <label class="btn btn-outline-success @if(request()->gender == "L") active @endif">
+                                        <input type="radio" name="gender" id="male" value="L" @if(request()->gender == "L") checked @endif>
+                                        <i class="fa fa-male mr-1"></i> Laki - Laki
+                                    </label>
+                                    <label class="btn btn-outline-success @if(request()->gender == "P") active @endif">
+                                        <input type="radio" name="gender" id="female" value="P" @if(request()->gender == "P") checked @endif>
+                                        <i class="fa fa-female mr-1"></i> Perempuan
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Status Ekonomi</th>
+                            <td>
+                                <div class="form-group mb-0">
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="all">Semua</option>
+                                        <option value="mampu" @if(request()->status == "mampu") selected @endif>Mampu</option>
+                                        <option value="kurang_mampu" @if(request()->status == "kurang_mampu") selected @endif>Kurang Mamou</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>RT / RW</th>
+                            <td>
+                                <div class="d-flex m-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text bg-white" for="inputGroupSelectRT">RT</label>
+                                        </div>
+                                        <select class="custom-select" id="inputGroupSelectRT" name="rt">
+                                            <option value="all" @if(!request()->rt || request()->rt == "all") selected  @endif>Semua</option>
+                                            @for ($i = 1; $i <= 10; $i++)
+                                            <option value="{{ '00' . $i }}" @if(request()->rt == "00" . $i) selected @endif>
+                                                {{ $i < 10 ? "00" . $i : "0" . $i }}
+                                            </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text bg-white" for="inputGroupSelectRW">RW</label>
+                                        </div>
+                                        <select class="custom-select" id="inputGroupSelectRW" name="rw">
+                                            <option value="all"  @if(!request()->rw || request()->rw == "all") selected  @endif>Semua</option>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                            <option value="{{ '00' . $i }}" @if(request()->rw == "00" . $i) selected @endif>
+                                                {{ $i < 10 ? "00" . $i : "0" . $i }}
+                                            </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <button class="btn btn-success" id="submitFilter">Terapkan</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -41,7 +118,7 @@
                                 <i class="fa fa-sort"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item @if((request()->order_by == "updated_at" && request()->order_type == "DESC") || (!isset($order_by) && !isset($order_by))) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=DESC" }}">Terakhir diperbarui</a>
+                                <a class="dropdown-item @if((request()->order_by == "updated_at" && request()->order_type == "DESC") || (!isset(request()->order_by) && !isset(request()->order_type)))) active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=DESC" }}">Terakhir diperbarui</a>
 
                                 <a class="dropdown-item @if(request()->order_by == "updated_at" && request()->order_type == "ASC") active @endif" href="{{ $citizens->url(1) . $search_by_url . $keyword_url . $per_page_url . "&order_by=updated_at&order_type=ASC" }}">Terlama</a>
 
@@ -220,7 +297,35 @@
 @stop
 
 @section('custom-scripts')
-    <script>
+<script>
+        const filterButton = document.querySelector("#submitFilter");
+
+        filterButton.addEventListener('click', () => {
+            // Get Gender
+            let gender = "all";
+            document.querySelectorAll('[name="gender"]').forEach(el => {
+                if (el.checked) {
+                    gender = el.value;
+                }
+            });
+            // Get Status Economy
+            const status = document.querySelector('[name="status"]').value;
+            // Get RT
+            const rt = document.querySelector('[name="rt"]').value;
+            // Get RW
+            const rw = document.querySelector('[name="rw"]').value;
+
+            // Append to URL
+            const url = new URL(window.location.href);
+            url.searchParams.set('gender', gender);
+            url.searchParams.set('status', status);
+            url.searchParams.set('rt', rt);
+            url.searchParams.set('rw', rw);
+
+            window.location.href = url.href;
+        });
+
+
         const customSelector = {
             first(selector) {
                 return document.querySelector(selector);

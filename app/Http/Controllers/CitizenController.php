@@ -21,6 +21,7 @@ class CitizenController extends Controller
 
         $per_page = request()->per_page ?? 10;
 
+        // Search
         if (isset(request()->keyword) && isset(request()->search_by)) {
             $keyword = request()->keyword;
             $search_by = request()->search_by;
@@ -34,6 +35,21 @@ class CitizenController extends Controller
             $citizens = Citizen::orderBy($order_by, $order_type);
         }
 
+        // Filter
+        if(isset(request()->gender) && request()->gender != "all") {
+            $citizens->where('gender', request()->gender);
+        }
+        if(isset(request()->status) && request()->status != "all") {
+            $citizens->where('status', request()->status);
+        }
+        if(isset(request()->rt) && request()->rt != "all") {
+            $citizens->where('rt', request()->rt);
+        }
+        if(isset(request()->rw) && request()->rw != "all") {
+            $citizens->where('rw', request()->rw);
+        }
+
+        // Paginate
         $citizens = $citizens->paginate($per_page);
 
         return view('citizen.index', compact('citizens'));
