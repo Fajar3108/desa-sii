@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top">
+<nav class="navbar navbar-fixed-top" style="z-index: 999">
     <div class="container-fluid">
         <div class="navbar-btn">
             <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
@@ -100,9 +100,9 @@
                         </ul>
                     </li>--}}
                     <li>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('logout') }}" method="POST" class="m-0">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Logout <i class="icon-login pl-1"></i></button>
+                            <button type="submit" class="btn btn-primary">Logout <i class="icon-login pl-1"></i></button>
                         </form>
                     </li>
                 </ul>

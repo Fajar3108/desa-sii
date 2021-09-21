@@ -5,15 +5,18 @@
 
 @section('content')
 <div class="row clearfix">
-    <div class="col-lg-12">
+
+    <div class="col-8">
         <div class="card">
+            <img src="{{ str_contains($post->thumbnail, "http") ? $post->thumbnail : asset("storage/" . $post->thumbnail) }}" class="card-img-top" alt="..." style="max-height: 350px; object-fit: cover;">
             <div class="card-body">
-                <img src="{{ str_contains($post->thumbnail, "http") ? $post->thumbnail : asset("storage/" . $post->thumbnail) }}">
-                <h1>{{ $post->title }}</h1>
-                {!! $post->description !!}
+                <h5 class="card-title">{{ $post->title }}</h5>
+                <p class="card-text">{!! $post->description !!}</p>
+                <p>
                 @foreach ($post->tags as $tag)
-                <p><a href="">#{{ $tag->slug }}</a></p>
+                    <a href="" class="mr-1 mb-1">#{{ $tag->slug }}</a>
                 @endforeach
+                </p>
             </div>
         </div>
     </div>

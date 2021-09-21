@@ -30,20 +30,20 @@
                             <a href="{{ route('users.index') }}"><i class="icon-users"></i> <span>User</span></a>
                         </li>
                         <li class="{{ Request::segment(1) === 'citizen' ? 'active' : null }}">
-                            <a href="{{ route('citizen.index') }}"><i class="icon-users"></i> <span>Penduduk</span></a>
+                            <a href="{{ route('citizen.index') }}"><i class="icon-emoticon-smile"></i> <span>Penduduk</span></a>
                         </li>
 
                         @endif
                         <li class="{{ Request::segment(1) === 'category' ? 'active' : null }}">
-                            <a href="/category"><i class="icon-folder"></i> <span>Album</span></a>
+                            <a href="/category"><i class="icon-picture"></i> <span>Album</span></a>
                         </li>
                         <li class="{{ Request::segment(1) === 'post' ? 'active' : null }}">
-                            <a href="{{ route('post.index') }}"><i class="icon-folder"></i> <span>Artikel</span></a>
+                            <a href="{{ route('post.index') }}"><i class="icon-globe"></i> <span>Artikel</span></a>
                         </li>
                         @if (auth()->user()->role->name == 'admin')
-                        <li class="dropdown">
-                            <a role="button" class="dropdown-toggle" id="dropdownMenuSetting" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-wrench"></i> <span>Pengaturan</span></a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuSetting">
+                        <li class="btn-group">
+                            <a class="btn dropdown-toggle text-left" id="dropdownMenuSetting" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cogs"></i> <span>Pengaturan</span></a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuSetting">
                                 <li><a class="dropdown-item {{ Request::segment(1) === 'setting' ? 'active text-white' : null }}" href="/setting">General</a></li>
                                 <li><a class="dropdown-item {{ Request::segment(1) === 'slider' ? 'active text-white' : null }}" href="/slider">Slider</a></li>
                                 {{-- <li><a class="dropdown-item {{ Request::segment(1) === 'page' ? 'active text-white' : null }}" href="{{ route('page.index') }}">Menu</a></li> --}}

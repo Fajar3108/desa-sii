@@ -192,27 +192,7 @@
 
     </head>
 
-    <?php
-        $setting = !empty($_GET['theme']) ? $_GET['theme'] : '';
-        $theme = "theme-cyan";
-        $menu = "";
-        if ($setting == 'p') {
-            $theme = "theme-purple";
-        } else if ($setting == 'b') {
-            $theme = "theme-blue";
-        } else if ($setting == 'g') {
-            $theme = "theme-green";
-        } else if ($setting == 'o') {
-            $theme = "theme-orange";
-        } else if ($setting == 'bl') {
-            $theme = "theme-blush";
-        } else {
-             $theme = "theme-cyan";
-        }
-
-    ?>
-
-    <body class="<?= $theme ?>">
+    <body class="theme-blue">
 
         <!-- Page Loader -->
         <div class="page-loader-wrapper">
@@ -473,12 +453,6 @@
             <script src="{{ asset('assets/vendor/flot-charts/jquery.flot.time.js') }}"></script>
             <script src="{{ asset('assets/vendor/flot-charts/jquery.flot.selection.js') }}"></script>
             <script src="{{ asset('assets/js/pages/charts/flot.js') }}"></script>
-        @endif
-
-        @if (Request::segment(2) === 'chartjs' )
-            <script src="{{ asset('assets/bundles/chartist.bundle.js') }}"></script>
-            <script src="{{ asset('assets/vendor/chartist/polar_area_chart.js') }}"></script>
-            <script src="{{ asset('assets/js/pages/charts/chartjs.js') }}"></script>
         @endif
 
         @if (Request::segment(2) === 'jquery-knob' )

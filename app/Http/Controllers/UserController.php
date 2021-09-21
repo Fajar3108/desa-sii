@@ -13,10 +13,12 @@ class UserController extends Controller
     {
         $keyword = request()->keyword;
         if ($keyword) {
-            $users = User::where('name', 'LIKE', "%$keyword%" )->orWhere('username', 'LIKE', "%$keyword%")->orWhere('email', 'LIKE', "%$keyword%")->latest()->paginate(10);
+            $users = User::where('name', 'LIKE', "%$keyword%" )->orWhere('username', 'LIKE', "%$keyword%")->orWhere('email', 'LIKE', "%$keyword%")->latest();
         } else {
-            $users = User::latest()->paginate(10);
+            $users = User::latest();
         }
+
+        $users = $users->paginate(10)->withQueryString();
 
         return view('users.index', compact('users'));
     }

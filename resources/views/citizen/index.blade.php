@@ -34,16 +34,16 @@
                             <th>Jenis Kelamin</th>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-success @if(!request()->gender || request()->gender == "all") active @endif">
+                                    <label class="btn btn-outline-primary @if(!request()->gender || request()->gender == "all") active @endif">
                                         <input type="radio" name="gender" id="all" value="all" @if(!request()->gender || request()->gender == "all") checked @endif>
                                         <i class="fa fa-male"></i>
                                         <i class="fa fa-female mr-1"></i> Semua
                                     </label>
-                                    <label class="btn btn-outline-success @if(request()->gender == "L") active @endif">
+                                    <label class="btn btn-outline-primary @if(request()->gender == "L") active @endif">
                                         <input type="radio" name="gender" id="male" value="L" @if(request()->gender == "L") checked @endif>
                                         <i class="fa fa-male mr-1"></i> Laki - Laki
                                     </label>
-                                    <label class="btn btn-outline-success @if(request()->gender == "P") active @endif">
+                                    <label class="btn btn-outline-primary @if(request()->gender == "P") active @endif">
                                         <input type="radio" name="gender" id="female" value="P" @if(request()->gender == "P") checked @endif>
                                         <i class="fa fa-female mr-1"></i> Perempuan
                                     </label>
@@ -98,7 +98,7 @@
                         <tr>
                             <th></th>
                             <td>
-                                <button class="btn btn-success" id="submitFilter">Terapkan</button>
+                                <button class="btn btn-primary" id="submitFilter">Terapkan</button>
                             </td>
                         </tr>
                     </table>
@@ -112,11 +112,11 @@
             <div class="header pb-2">
                 <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Filter">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Filter">
                             <i class="fa fa-filter"></i>
                         </button>
                         <span>
-                            <button type="button" class="btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-sort"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
@@ -135,9 +135,9 @@
                         </span>
 
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#importModal" title="Import"><i class="fa fa-upload"></i></button>
+                            <button type="button" class="btn btn-outline-primary"  data-toggle="modal" data-target="#importModal" title="Import"><i class="fa fa-upload"></i></button>
 
-                            <a href="{{ route('citizen.export') }}" class="btn btn-outline-success" target="_blank" title="Export"><i class="fa fa-download"></i></a>
+                            <a href="{{ route('citizen.export') }}" class="btn btn-outline-primary" target="_blank" title="Export"><i class="fa fa-download"></i></a>
                         </div>
 
                         <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete All Selected" id="massDelete" disabled><i class="icon-trash"></i></button>
@@ -157,11 +157,11 @@
                             <div class="input-group input-group-sm mr-1">
                                 <input type="text" class="form-control" placeholder="Cari..." aria-describedby="searchButton" name="keyword">
                                 <div class="input-group-append">
-                                    <button class="btn btn-success" type="submit" id="searchButton"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-primary" type="submit" id="searchButton"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                             <div class="btn-group mr-1">
-                                <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-table mr-1"></i> {{ request()->per_page ?? 10 }}
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -171,7 +171,7 @@
                                     @endfor
                                 </div>
                             </div>
-                            <a href="{{ route('citizen.index') }}" class="btn btn-sm border-success d-flex align-items-center" title="Refresh - Reset All Filter"><i class="fa fa-retweet text-success"></i></a>
+                            <a href="{{ route('citizen.index') }}" class="btn btn-sm border-primary d-flex align-items-center" title="Refresh - Reset All Filter"><i class="fa fa-retweet text-primary"></i></a>
                         </form>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-limitter m-0"><a href="{{ route('citizen.show', $citizen->id) }}" class="text-success">{{ $citizen->name }}</a></p>
+                                        <p class="text-limitter m-0"><a href="{{ route('citizen.show', $citizen->id) }}" class="text-primary">{{ $citizen->name }}</a></p>
                                     </td>
                                     <td>
                                         {{ $citizen->no_hp }}
@@ -234,8 +234,8 @@
                                     </td>
                                     <td>{{ $citizen->status == 'mampu' ? 'Mampu' : 'Kurang Mampu' }}</td>
                                     <td>
-                                        <a href="{{ route('citizen.show', $citizen->id) }}" class="btn btn-info" title="Show"><i class="fa fa-eye"></i></a>
-                                        <a href="{{ route('citizen.edit', $citizen->id) }}" class="btn btn-success" title="Edit"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('citizen.show', $citizen->id) }}" class="btn btn-primary" title="Show"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('citizen.edit', $citizen->id) }}" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -283,7 +283,7 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
-            <button class="btn btn-success btn-block">Submit</button>
+            <button class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>
     </div>

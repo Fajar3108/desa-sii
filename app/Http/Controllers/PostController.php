@@ -16,10 +16,12 @@ class PostController extends Controller
     {
 
         if (request()->keyword) {
-            $posts = Post::where('title', 'LIKE', '%' . request()->keyword . '%')->orderBy('created_at', 'DESC')->paginate(10);
+            $posts = Post::latest()->where('title', 'LIKE', '%' . request()->keyword . '%');
         } else {
-            $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+            $posts = Post::latest();
         }
+
+        $posts = $posts->paginate(10)->withQueryString();
 
         return view('post.index', compact('posts'));
     }

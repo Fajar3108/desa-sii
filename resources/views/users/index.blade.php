@@ -3,25 +3,23 @@
 
 @section('content')
 <div class="row clearfix">
-    <div class="col-12">
-        <form action="{{ route('users.index') }}">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Cari user disini..." aria-describedby="searchButton" name="keyword">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
+
     <div class="col-lg-12">
         <div class="card">
-            <div class="header">
+            <div class="header m-0 pb-0">
                 <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h2>Daftar User</h2>
+                    <div class="col-6">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#userCreateModal">Tambah</button>
                     </div>
                     <div class="col-6 text-right">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#userCreateModal">Tambah</button>
+                        <form action="{{ route('users.index') }}" style="max-width: 300px" class="m-0 ml-auto">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari user disini..." aria-describedby="searchButton" name="keyword">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" id="searchButton">Search</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -59,7 +57,7 @@
                                         <form action="{{ route("users.destroy", $user->id) }}" method="POST" class="mb-0">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
+                                            <button type="submit" class="btn btn-primary" title="Delete" onclick="handler(event)"><i class="fa fa-trash-o"></i></button>
                                         </form>
                                     </td>
                                 </tr>

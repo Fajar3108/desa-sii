@@ -15,9 +15,9 @@ class VillageInfoSeeder extends Seeder
     public function run()
     {
         VillageInfo::create([
-            'name' => 'Desa Kita',
+            'name' => 'Cireundeu',
             'description' => 'Lorem ipsum dolor amet',
-            'address' => 'Depok',
+            'address' => 'Tasik Malaya',
             'no_hp' => '02198918181',
             'email' => 'desa@gmail.com',
             'start_day' => 'senin',
