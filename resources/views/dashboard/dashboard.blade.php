@@ -75,7 +75,7 @@
                         <h2><i class="icon-picture text-primary"></i></h2>
                         <div class="pl-3">
                             <div class="number">
-                                <span>{{ App\Models\gallery::get()->count() }}</span>
+                                <span>{{ App\Models\Gallery::get()->count() }}</span>
                             </div>
                             <h6 class="text-muted">Gallery</h6>
                         </div>
