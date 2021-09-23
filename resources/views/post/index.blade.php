@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', 'Artikel')
 
-@section('custom-style');
+@section('custom-style')
 <style>
 .title-limit {
     overflow: hidden;
@@ -38,13 +38,13 @@
     </div>
 
     @foreach ($posts as $post)
-        <div class="col-12 col-md-6 mb-3 position-relative" style="height: 300px">
+        <div class="col-12 col-md-6 mb-3 position-relative" style="height: 300px; overflow: hidden;">
             <a href="{{ route('post.show', $post->id) }}">
-                <div class="card bg-dark text-white position-relative">
+                <div class="card text-white position-relative h-100">
                     <img src="{{ str_contains($post->thumbnail, "http") ? $post->thumbnail : asset("storage/" . $post->thumbnail) }}" class="card-img" alt="..." style="height: 100%; object-fit: cover">
                     <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-color: rgba(0,0,0,.3)">
                         <h5 class="card-title title-limit">{{ $post->title }}</h5>
-                        <p class="card-text desc-limit">{{ $post->description }}.</p>
+                        <p class="card-text desc-limit">{!! $post->description !!}.</p>
                         <p class="card-text">{{ $post->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
@@ -53,6 +53,7 @@
             <div class="position-absolute" style="top: 15; right: 30; z-index: 99;">
                 <form action="{{ route('post.destroy', $post->id) }}" method="POST">
                     @csrf
+                    @method('DELETE')
                     <a href="{{ route('post.edit', $post->id) }}" class="btn btn-success btn-lg"><i class="fa fa-edit"></i></a>
                     <button type="submit" class="btn btn-danger btn-lg"><i class="fa fa-trash"></i></button>
                 </form>

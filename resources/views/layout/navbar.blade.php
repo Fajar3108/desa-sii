@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top" style="z-index: 999">
+<nav class="navbar navbar-fixed-top" style="z-index: 100">
     <div class="container-fluid">
         <div class="navbar-btn">
             <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
