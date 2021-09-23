@@ -159,7 +159,7 @@
 
     <div class="col-12 col-md-7" style="height: 350px">
         @php
-            $latestPost = App\Models\Post::first();
+            $latestPost = App\Models\Post::latest()->first();
         @endphp
         <a href="{{ route('post.show', $latestPost->id) }}">
             <div class="card bg-dark text-white position-relative">
