@@ -44,7 +44,7 @@
                     <img src="{{ str_contains($post->thumbnail, "http") ? $post->thumbnail : asset("storage/" . $post->thumbnail) }}" class="card-img" alt="..." style="height: 100%; object-fit: cover">
                     <div class="card-img-overlay d-flex flex-column justify-content-end" style="background-color: rgba(0,0,0,.3)">
                         <h5 class="card-title title-limit">{{ $post->title }}</h5>
-                        <p class="card-text desc-limit">{!! $post->description !!}.</p>
+                        <p class="card-text desc-limit">{!! Str::limit($post->description, 100) !!}.</p>
                         <p class="card-text">{{ $post->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
