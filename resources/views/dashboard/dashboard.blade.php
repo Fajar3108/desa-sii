@@ -36,7 +36,7 @@
     $totalCitizen =  App\Models\Citizen::all()->count();
 @endphp
 
-<div class="row clearfix">
+<div class="row clearfix mb-4">
     <div class="col-12 row p-0 px-3 mx-auto mb-3">
         <div class="col-md-3 col-sm-6 p-0 pr-md-2 pr-sm-2">
             <div class="card card-hover m-0 mb-1 overflowhidden number-chart">
