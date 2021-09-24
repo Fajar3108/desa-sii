@@ -108,11 +108,11 @@
                 <div class="stats-report">
                     <div class="stat-item">
                         <h5>Laki - Laki</h5>
-                        <b class="col-black">{{ $male * 100 / $totalCitizen }}%</b>
+                        <b class="col-black">{{ number_format($male * 100 / $totalCitizen, 2) }}%</b>
                     </div>
                     <div class="stat-item">
                         <h5>Perempuan</h5>
-                        <b class="col-black">{{ $female * 100 / $totalCitizen }}%</b>
+                        <b class="col-black">{{ number_format($female * 100 / $totalCitizen, 2) }}%</b>
                     </div>
                 </div>
             </div>
