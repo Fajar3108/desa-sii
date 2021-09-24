@@ -27,7 +27,6 @@ class PostRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'thumbnail' => ['image', 'max:2048'],
-            'tags' => ['required'],
         ];
     }
 }

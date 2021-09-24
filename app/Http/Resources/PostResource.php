@@ -18,7 +18,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => str_contains($this->thumbnail, "http") ? $this->thumbnail : asset("storage/" . $this->thumbnail),
             'tags' => $this->tags,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

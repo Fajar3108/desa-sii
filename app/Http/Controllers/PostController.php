@@ -42,7 +42,6 @@ class PostController extends Controller
             'thumbnail' => 'required'
         ]);
 
-        $tags = $this->tagFilter($request->tags);
 
         $thumbnail = ImageHandler::store($request->thumbnail, 'posts');
 
@@ -52,7 +51,10 @@ class PostController extends Controller
             'thumbnail' => $thumbnail
         ]);
 
-        $post->tags()->attach($tags);
+        if(isset($request->tags)) {
+            $tags = $this->tagFilter($request->tags);
+            $post->tags()->attach($tags);
+        }
 
         ALert::success('Success', 'Post created successfuly');
 
